@@ -38,9 +38,9 @@ def show_create_fish():
 def process_create_fish():
     print(request.form)
     name = request.form.get('name')
-    scientific_name = request.form.get('scientific-name')
-    higher_classification = request.form.get('higher-classification')
-    full_grown_size_in_cm = float(request.form.get('full-grown-size-in-cm'))
+    scientific_name = request.form.get('scientific_name')
+    higher_classification = request.form.get('higher_classification')
+    full_grown_size_in_cm = float(request.form.get('full_grown_size_in_cm'))
     diet = request.form.get('diet')
 
     # insert only ONE new documernt
@@ -79,13 +79,31 @@ def process_delete_fish(fish_id):
 
 # UPDATE
 # route to show the form for updating
-@app.route('fish/<fish_id>/update')
+@app.route('/fish/<fish_id>/update')
 def show_update_fish(fish_id):
     fish_to_update = db.fish.find_one({
         '_id': ObjectId(fish_id)
     })
     return render_template('show_update_fish.template.html',
                            fish_to_update=fish_to_update)
+
+# process the fish update
+
+
+@app.route('/fish/<fish_id>/update', methods=['POST'])
+def process_update_fish(fish_id):
+    db.fish.update_one({
+        "_id": ObjectId(fish_id)
+    }, {
+        "$set": {
+            "name": request.form['name'],
+            "scientific_name": request.form['scientific_name'],
+            "higher_classification": request.form['higher_classification'],
+            "full_grown_size_in_cm": request.form['full_grown_size_in_cm'],
+            "diet": request.form['diet']
+        }
+    })
+    return redirect(url_for('show_all_fish'))
 
 
 # "magic code" -- boilerplate
