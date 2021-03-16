@@ -26,7 +26,7 @@ All Fishes contributed by our users
         <td>{{each_fish.higher_classification}}</td>
         <td>{{each_fish.full_grown_size_in_cm}}</td>
         <td>{{each_fish.diet}}</td>
-        <td><a href="" class="btn btn-danger">Delete</a></td>
+        <td><a href="{{url_for('delete_fish', fish_id=each_fish._id)}}" class="btn btn-danger">Delete</a></td>
     </tr>
     {% endfor%}
 

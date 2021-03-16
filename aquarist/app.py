@@ -53,6 +53,28 @@ def process_create_fish():
     })
     return redirect(url_for('show_all_fish'))
 
+# DELETE
+# route to show the form for deletion
+
+
+@app.route('/fish/<fish_id>/delete')
+def delete_fish(fish_id):
+    # find the fish that we want to delete
+    fish = db.fish.find_one({
+        '_id': ObjectId(fish_id)
+    })
+
+    return render_template('confirm_delete_fish.template.html',
+                           fish_to_delete=fish)
+
+
+@app.route('/fish/<fish_id>/delete', methods=['POST'])
+def process_delete_fish(fish_id):
+    db.fish.delete_one({
+        "_id": ObjectId(fish_id)
+    })
+    return redirect(url_for('show_all_fish'))
+
 
 # "magic code" -- boilerplate
 if __name__ == '__main__':
