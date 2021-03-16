@@ -68,12 +68,24 @@ def delete_fish(fish_id):
                            fish_to_delete=fish)
 
 
+# route to process the deletion
 @app.route('/fish/<fish_id>/delete', methods=['POST'])
 def process_delete_fish(fish_id):
     db.fish.delete_one({
         "_id": ObjectId(fish_id)
     })
     return redirect(url_for('show_all_fish'))
+
+
+# UPDATE
+# route to show the form for updating
+@app.route('fish/<fish_id>/update')
+def show_update_fish(fish_id):
+    fish_to_update = db.fish.find_one({
+        '_id': ObjectId(fish_id)
+    })
+    return render_template('show_update_fish.template.html',
+                           fish_to_update=fish_to_update)
 
 
 # "magic code" -- boilerplate

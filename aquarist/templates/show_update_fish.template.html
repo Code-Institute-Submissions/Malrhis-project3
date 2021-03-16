@@ -1,0 +1,38 @@
+{% extends 'base.template.html' %}
+{%block title%}
+Create Fish Form
+{% endblock%}
+
+{%block content%}
+<h1>Updating {{fish_to_update.name}}</h1>
+<form method="POST">
+    <div>
+        <label class="form-label">Name:</label>
+        <input type="text" name="name" value="{{fish_to_update.name}}" class="form-control">
+    </div>
+    <div>
+        <label class="form-label">Scientific Name </label>
+        <input type="text" name="scientific-name" value="{{fish_to_update.scientific_name}}" class="form-control">
+    </div>
+    <div>
+        <label class="form-label">Higher Classification: </label>
+        <input type="text" name="higher-classification" value="{{fish_to_update.higher_classification}}"
+            class="form-control">
+    </div>
+    <div>
+        <label class="form-label">Full grown size in cm: </label>
+        <input type="text" name="full-grown-size-in-cm" value="{{fish_to_update.full_grown_size_in_cm}}"
+            class="form-control">
+    </div>
+    <div>
+        <label class="form-label">Diet: </label>
+        <select name="diet">
+            <option>Carnivore</option>
+            <option>Omnivore</option>
+            <option>Herbivore</option>
+        </select>
+    </div>
+    <input type="submit" value="Create" class="btn btn-primary my-3">
+</form>
+
+{% endblock %}
