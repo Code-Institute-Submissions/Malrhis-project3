@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, redirect, url_for
+from flask import Flask, render_template, request, redirect, url_for, flash
 import os
 import pymongo
 from dotenv import load_dotenv
@@ -7,10 +7,13 @@ from bson.objectid import ObjectId
 load_dotenv()
 
 app = Flask(__name__)
+# assign secret key to setup sessions
+app.secret_key = os.environ.get('SECRET_KEY')
 
 MONGO_URI = os.environ.get('MONGO_URI')
 DB_NAME = 'aquarist_resource'
 
+# set up mongo client
 client = pymongo.MongoClient(MONGO_URI)
 db = client[DB_NAME]
 
@@ -51,6 +54,7 @@ def process_create_fish():
         "full_grown_size_in_cm": full_grown_size_in_cm,
         "diet": diet
     })
+    flash("A new fish has been created successfully!")
     return redirect(url_for('show_all_fish'))
 
 # DELETE
