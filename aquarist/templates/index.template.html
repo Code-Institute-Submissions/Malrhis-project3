@@ -5,4 +5,11 @@ The Aquarist's Resource
 
 {%block content%}
 <h1>The Aquarist's Resource</h1>
+<section class="container">
+    <div class="row">
+        <a class="btn btn-dark col-md-4 px-3" href="{{url_for('show_all_fish')}}" role="button">Fish</a>
+        <a class="btn btn-dark col-md-4 px-3" href="#" role="button">Plants</a>
+        <a class="btn btn-dark col-md-4 px-3" href="#" role="button">Accessories</a>
+    </div>
+</section>
 {% endblock%}
