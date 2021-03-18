@@ -1,4 +1,5 @@
-from flask import Flask, render_template, request, redirect, url_for, flash
+from flask import Flask, render_template, request, redirect, url_for
+from flask import flash, send_from_directory
 import os
 import pymongo
 from dotenv import load_dotenv
@@ -17,11 +18,22 @@ DB_NAME = 'aquarist_resource'
 client = pymongo.MongoClient(MONGO_URI)
 db = client[DB_NAME]
 
+# favicon route
+
+
+@app.route('/favicon.ico')
+def get_favicon():
+    return send_from_directory(os.path.join(app.root_path, 'static'),
+                               'favicon.ico',
+                               mimetype='image/vnd.microsoft.icon')
+
+
 # route to show the homepage
+
+
 @app.route('/')
 def index():
     return render_template('index.template.html')
-
 
 
 # READ
