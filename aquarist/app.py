@@ -62,6 +62,7 @@ def process_create_fish():
     name = request.form.get('name')
     scientific_name = request.form.get('scientific_name')
     higher_classification = request.form.get('higher_classification')
+    fish_picture = request.form.get('fish_picture')
     full_grown_size_in_cm = float(request.form.get('full_grown_size_in_cm'))
     diet = request.form.get('diet')
 
@@ -70,6 +71,7 @@ def process_create_fish():
         "name": name,
         "scientific_name": scientific_name,
         "higher_classification": higher_classification,
+        "fish_picture": fish_picture,
         "full_grown_size_in_cm": full_grown_size_in_cm,
         "diet": diet
     })
