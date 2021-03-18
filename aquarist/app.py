@@ -17,6 +17,13 @@ DB_NAME = 'aquarist_resource'
 client = pymongo.MongoClient(MONGO_URI)
 db = client[DB_NAME]
 
+# route to show the homepage
+@app.route('/')
+def index():
+    return render_template('index.template.html')
+
+
+
 # READ
 # route to show all the fishes
 
