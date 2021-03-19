@@ -64,7 +64,11 @@ def process_create_fish():
     higher_classification = request.form.get('higher_classification')
     fish_picture = request.form.get('fish_picture')
     full_grown_size_in_cm = float(request.form.get('full_grown_size_in_cm'))
+    reproduction = request.form.get('reproduction')
     diet = request.form.get('diet')
+    water_temp_in_degc = float(request.form.get('water_temp_in_degc'))
+    pH = float(request.form.get('pH'))
+    tank_setup_text = request.form.get('tank_setup_text')
 
     # insert only ONE new documernt
     db.fish.insert_one({
@@ -73,7 +77,11 @@ def process_create_fish():
         "higher_classification": higher_classification,
         "fish_picture": fish_picture,
         "full_grown_size_in_cm": full_grown_size_in_cm,
-        "diet": diet
+        "reproduction": reproduction,
+        "diet": diet,
+        "water_temp_in_degc": water_temp_in_degc,
+        "pH": pH,
+        "tank_setup_text": tank_setup_text
     })
     flash("A new fish has been created successfully!")
     return redirect(url_for('show_all_fish'))
