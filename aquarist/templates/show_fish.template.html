@@ -6,32 +6,31 @@ Fish List
 {%block content%}
 <h1>Fish List</h1>
 
+<!-- button for redirecting to create fish -->
 <a href="{{url_for('show_create_fish')}}" class="btn btn-primary">Add Fish</a>
 
+<div class="card-group">
 
-
-<table class="table">
-    <thead>
-        <tr>
-            <th>Name</th>
-            <th>Scientific Name</th>
-            <th>Higher Classification</th>
-            <th>Full Grown Size in cm</th>
-            <th>Diet</th>
-            <th>Actions</th>
-        </tr>
-    </thead>
-    {%for each_fish in fish %}
-    <tr>
-        <td>{{each_fish.name}}</td>
-        <td>{{each_fish.scientific_name}}</td>
-        <td>{{each_fish.higher_classification}}</td>
-        <td>{{each_fish.full_grown_size_in_cm}}</td>
-        <td>{{each_fish.diet}}</td>
-        <td><a href="{{url_for('delete_fish', fish_id=each_fish._id)}}" class="btn btn-danger">Delete</a></td>
-    </tr>
+    {%for each_fish in fish%}
+    <div class="card col-md-4">
+        <img class="card-img-top" src="{{each_fish.fish_picture}}" alt="Card image cap">
+        <div class="card-body">
+            <h5 class="card-title">{{each_fish.name}}</h5>
+            <p class="card-text">{{each_fish.scientific_name}}</p>
+            <p class="card-text">{{each_fish.higher_classification}}</p>
+            <p class="card-text">Full-grown size: {{each_fish.higher_classification}}</p>
+            <p class="card-text">Reproduction: {{each_fish.reproduction}}</p>
+            <hr>
+            <h6>Aquarium Setup</h6>
+            <p class="card-text">Water Temp (°C) {{each_fish.water_temp_in_degc}}</p>
+            <p class="card-text">pH {{each_fish.pH}}</p>
+            <p class="card-text">Tank Setup: {{each_fish.tank_setup_text}}</p>
+        </div>
+         <div class="card-footer">
+                <small class="text-muted">Last updated 3 mins ago</small>
+            </div>
+    </div>
     {% endfor%}
-
-</table>
+</div>
 
 {% endblock %}
