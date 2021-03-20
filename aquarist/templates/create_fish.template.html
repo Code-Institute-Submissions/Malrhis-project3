@@ -5,6 +5,13 @@ Create Fish Form
 
 {%block content%}
 <h1>Add New Fish Entry</h1>
+{%if errors|length > 0 %}
+    <div class="alert alert-danger">
+        {%for e in errors.values() %}
+        <p>Error: {{e}}</p>
+        {% endfor %}
+    </div>
+{%endif%}
 <form method="POST">
     <div>
         <label class="form-label">Name:</label>
@@ -18,9 +25,9 @@ Create Fish Form
         <label class="form-label">Higher Classification: </label>
         <input type="text" placeholder="e.g. Betta" name="higher_classification" class="form-control">
     </div>
-     <div>
+    <div>
         <label class="form-label">Picture Link</label>
-        <input type="text" placeholder = "input an image URL here" name="fish_picture" class="form-control">
+        <input type="text" placeholder="input an image URL here" name="fish_picture" class="form-control">
     </div>
     <div>
         <label class="form-label">Full grown size in cm: </label>

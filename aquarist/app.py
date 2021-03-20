@@ -63,11 +63,11 @@ def process_create_fish():
     scientific_name = request.form.get('scientific_name')
     higher_classification = request.form.get('higher_classification')
     fish_picture = request.form.get('fish_picture')
-    full_grown_size_in_cm = float(request.form.get('full_grown_size_in_cm'))
+    full_grown_size_in_cm = request.form.get('full_grown_size_in_cm')
     reproduction = request.form.get('reproduction')
     diet = request.form.get('diet')
-    water_temp_in_degc = float(request.form.get('water_temp_in_degc'))
-    pH = float(request.form.get('pH'))
+    water_temp_in_degc = request.form.get('water_temp_in_degc')
+    pH = request.form.get('pH')
     tank_setup_text = request.form.get('tank_setup_text')
 
     # Validate Form Entry in Backend app.py
@@ -85,21 +85,45 @@ def process_create_fish():
     if len(full_grown_size_in_cm) == 0:
         errors['full_grown_size_is_blank'] = "No fish size was entered"
 
+    if len(full_grown_size_in_cm) < 0:
+        errors['full_grown_size_is_negative'] = "Fish Size cannot be negative"
+
+    if len(reproduction) == 0:
+        errors['reproduction_is_blank'] = "No reproduction method was entered"
+
+    if len(water_temp_in_degc) == 0:
+        errors['water_temp_is_blank'] = "No water temperature was entered"
+
+    if len(water_temp_in_degc) < 0:
+        errors['water_temp_is_negative'] = "Water Temperature in Deg C cannot be negative"
+
+    if len(pH) == 0:
+        errors['pH_is_blank'] = "pH cannot be blank"
+
+    if len(pH) < 0:
+        errors['pH_is_negative'] = "pH cannot be negative"
+
+    if len(pH) == 0:
+        errors['tank_setup_text_is_blank'] = "No tank setup text was entered"
+
     # insert only ONE new documernt
-    db.fish.insert_one({
-        "name": name,
-        "scientific_name": scientific_name,
-        "higher_classification": higher_classification,
-        "fish_picture": fish_picture,
-        "full_grown_size_in_cm": full_grown_size_in_cm,
-        "reproduction": reproduction,
-        "diet": diet,
-        "water_temp_in_degc": water_temp_in_degc,
-        "pH": pH,
-        "tank_setup_text": tank_setup_text
-    })
-    flash("A new fish has been created successfully!")
-    return redirect(url_for('show_all_fish'))
+    if len(errors) == 0:
+        db.fish.insert_one({
+            "name": name,
+            "scientific_name": scientific_name,
+            "higher_classification": higher_classification,
+            "fish_picture": fish_picture,
+            "full_grown_size_in_cm": float(full_grown_size_in_cm),
+            "reproduction": reproduction,
+            "diet": diet,
+            "water_temp_in_degc": float(water_temp_in_degc),
+            "pH": float(pH),
+            "tank_setup_text": tank_setup_text
+        })
+        flash("A new fish has been created successfully!")
+        return redirect(url_for('show_all_fish'))
+    else:
+        return render_template('create_fish.template.html', errors=errors)
 
 # DELETE
 # route to show the form for deletion
