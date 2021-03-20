@@ -18,7 +18,7 @@ DB_NAME = 'aquarist_resource'
 client = pymongo.MongoClient(MONGO_URI)
 db = client[DB_NAME]
 
-# favicon route
+# favicon GET route
 
 
 @app.route('/favicon.ico')
@@ -58,7 +58,7 @@ def show_create_fish():
 
 @app.route('/fish/create', methods=["POST"])
 def process_create_fish():
-    print(request.form)
+
     name = request.form.get('name')
     scientific_name = request.form.get('scientific_name')
     higher_classification = request.form.get('higher_classification')
@@ -69,6 +69,21 @@ def process_create_fish():
     water_temp_in_degc = float(request.form.get('water_temp_in_degc'))
     pH = float(request.form.get('pH'))
     tank_setup_text = request.form.get('tank_setup_text')
+
+    # Validate Form Entry in Backend app.py
+    errors = {}
+
+    if len(name) == 0:
+        errors['name_is_blank'] = "Fish name cannot be blank"
+
+    if len(scientific_name) == 0:
+        errors['scientific_name_is_blank'] = "Scientific name cannot be blank"
+
+    if len(fish_picture) == 0:
+        errors['fish_picture_is_blank'] = "No fish pic URL was found"
+
+    if len(full_grown_size_in_cm) == 0:
+        errors['full_grown_size_is_blank'] = "No fish size was entered"
 
     # insert only ONE new documernt
     db.fish.insert_one({
