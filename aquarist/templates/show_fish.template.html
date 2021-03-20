@@ -20,8 +20,8 @@ Fish List
             <p class="card-text my-0 text-muted">{{each_fish.higher_classification}}</p>
         </div>
         <ul class="list-group list-group-flush"></ul>
-            <li class="list-group-item">Full-grown size: {{each_fish.full_grown_size_in_cm}} cm </li>
-            <li class="list-group-item">Reproduction: {{each_fish.reproduction}} </li>
+        <li class="list-group-item">Full-grown size: {{each_fish.full_grown_size_in_cm}} cm </li>
+        <li class="list-group-item">Reproduction: {{each_fish.reproduction}} </li>
         </ul>
         <div class="card-body">
             <h5 class="card-title text-muted">Aquarium Setup</h5>
@@ -30,6 +30,14 @@ Fish List
             <p class="card-text my-0 small">{{each_fish.tank_setup_text}}</p>
         </div>
         <div class="card-footer">
+            <div class="container">
+                <div class="row">
+                    <div class="col">
+                        <a href="{{ url_for('delete_fish', fish_id=each_fish._id )}}" class="btn btn-danger">Delete</a>
+                        <a href="{{ url_for('show_update_fish', fish_id=each_fish._id)}}" class="btn btn-success">Update</a>
+                    </div>
+                </div>
+            </div>
             <small class="text-muted">Last updated 3 mins ago</small>
         </div>
     </div>
