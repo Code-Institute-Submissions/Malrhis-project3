@@ -16,10 +16,10 @@ Fish List
         <img class="card-img-top" src="{{each_fish.fish_picture}}" alt="Card image cap">
         <div class="card-body">
             <h5 class="card-title">{{each_fish.name}}</h5>
+            <p class="card-text my-0 text-muted">{{each_fish.scientific_name}}</p>
+            <p class="card-text my-0 text-muted">{{each_fish.higher_classification}}</p>
         </div>
         <ul class="list-group list-group-flush"></ul>
-            <li class="list-group-item">{{each_fish.scientific_name}}</li>
-            <li class="list-group-item">{{each_fish.higher_classification}}</li>
             <li class="list-group-item">Full-grown size: {{each_fish.full_grown_size_in_cm}} cm </li>
             <li class="list-group-item">Reproduction: {{each_fish.reproduction}} </li>
         </ul>
