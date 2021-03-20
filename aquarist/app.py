@@ -84,8 +84,7 @@ def process_create_fish():
 
     if len(full_grown_size_in_cm) == 0:
         errors['full_grown_size_is_blank'] = "No fish size was entered"
-
-    if len(full_grown_size_in_cm) < 0:
+    elif int(full_grown_size_in_cm) < 0:
         errors['full_grown_size_is_negative'] = "Fish Size cannot be negative"
 
     if len(reproduction) == 0:
@@ -93,14 +92,12 @@ def process_create_fish():
 
     if len(water_temp_in_degc) == 0:
         errors['water_temp_is_blank'] = "No water temperature was entered"
-
-    if len(water_temp_in_degc) < 0:
-        errors['water_temp_is_negative'] = "Water Temperature in Deg C cannot be negative"
+    elif int(water_temp_in_degc) < 0:
+        errors['water_temp_is_negative'] = "Water Temp cannot be negative"
 
     if len(pH) == 0:
         errors['pH_is_blank'] = "pH cannot be blank"
-
-    if len(pH) < 0:
+    elif int(pH) < 0:
         errors['pH_is_negative'] = "pH cannot be negative"
 
     if len(pH) == 0:
