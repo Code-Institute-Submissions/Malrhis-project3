@@ -120,7 +120,9 @@ def process_create_fish():
         flash("A new fish has been created successfully!")
         return redirect(url_for('show_all_fish'))
     else:
-        return render_template('create_fish.template.html', errors=errors)
+        return render_template('create_fish.template.html',
+                               errors=errors,
+                               original_values=request.form)
 
 # DELETE
 # route to show the form for deletion
