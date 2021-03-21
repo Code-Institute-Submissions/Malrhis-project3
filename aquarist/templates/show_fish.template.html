@@ -6,10 +6,18 @@ Fish List
 {%block content%}
 <h1>Fish List</h1>
 
+<form method="GET">
+            <div>
+                <input type="text" name="name" class="form-control" placeholder="Enter a Fish Name"/>
+            </div>
+            <input type="submit" value="Search" class="btn btn-primary mt-3"/>
+        </form>
+
 <!-- button for redirecting to create fish -->
+
 <a href="{{url_for('show_create_fish')}}" class="btn btn-primary">Add Fish</a>
 
-<div class="card-group">
+<div class="row">
 
     {%for each_fish in fish%}
     <div class="card col-md-4">

@@ -42,7 +42,17 @@ def index():
 
 @app.route('/fish')
 def show_all_fish():
-    fish = db.fish.find()
+    name = request.args.get('name')
+
+    criteria = {}
+
+    if name:
+        criteria['name']={
+            "$regex":name,
+            "$options":'i'
+        }
+
+    fish = db.fish.find(criteria)
     return render_template('show_fish.template.html', fish=fish)
 
 # CREATE
@@ -237,8 +247,8 @@ def process_update_fish(fish_id):
         # **request.form will have priority over
         old_values = {**fish_to_update, **request.form}
         return render_template('show_update_fish.template.html',
-                                errors=errors,
-                                fish_to_update=old_values)
+                               errors=errors,
+                               fish_to_update=old_values)
 
 
 # "magic code" -- boilerplate
