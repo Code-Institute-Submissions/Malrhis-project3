@@ -4,12 +4,15 @@ Aquarist's Resource
 {% endblock%}
 
 {%block content%}
-<h1>The Aquarist's Resource</h1>
-<section class="container">
-    <div class="row">
-        <a class="btn btn-dark col-md-4 px-3" href="{{url_for('show_all_fish')}}" role="button">Fish</a>
-        <a class="btn btn-dark col-md-4 px-3" href="#" role="button">Plants</a>
-        <a class="btn btn-dark col-md-4 px-3" href="#" role="button">Accessories</a>
-    </div>
-</section>
+<div class="col-md-4 p-lg-5 mx-auto my-5">
+    <h1 class="display-4 font-weight-normal">Fish Trove</h1>
+    <p class="lead font-weight-normal">Just Keep Swimming</p>
+    <a class="btn btn-outline-secondary" href="{{url_for('show_all_fish')}}">Fish Repository</a>
+</div>
+<hr>
+<div class="col-md-4 p-lg-5 mx-auto my-5">
+    <h1 class="display-4 font-weight-normal">Aquatic Plants</h1>
+    <p class="lead font-weight-normal">All you need to know about your favorite aquascape plants</p>
+    <a class="btn btn-outline-secondary" href="{{url_for('show_all_fish')}}">Aquatic Plant Repository</a>
+</div>
 {% endblock%}

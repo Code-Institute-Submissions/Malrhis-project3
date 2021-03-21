@@ -1,3 +1,7 @@
 .navbar {
   background-color: #30C47E;
 }
+
+.push-navbar-down {
+    height: 56px;
+}
