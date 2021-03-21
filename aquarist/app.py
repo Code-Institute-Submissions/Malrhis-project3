@@ -47,9 +47,9 @@ def show_all_fish():
     criteria = {}
 
     if name:
-        criteria['name']={
-            "$regex":name,
-            "$options":'i'
+        criteria['name'] = {
+            "$regex": name,
+            "$options": 'i'
         }
 
     fish = db.fish.find(criteria)
