@@ -4,14 +4,17 @@ Create Fish Form
 {% endblock%}
 
 {%block content%}
-<h1>Add New Fish Entry</h1>
+
 {%if errors|length > 0 %}
-    <div class="alert alert-danger">
-        {%for e in errors.values() %}
-        <p>Error: {{e}}</p>
-        {% endfor %}
-    </div>
+<div class="alert alert-danger">
+    {%for e in errors.values() %}
+    <p>Error: {{e}}</p>
+    {% endfor %}
+</div>
 {%endif%}
+
+<h1>Add New Fish Entry</h1>
+
 <form method="POST">
     <div>
         <label class="form-label">Name:</label>
@@ -19,45 +22,49 @@ Create Fish Form
     </div>
     <div>
         <label class="form-label">Scientific Name </label>
-        <input type="text" placeholder="e.g. Betta Splendens" name="scientific_name" class="form-control">
+        <input type="text" placeholder="e.g. Betta Splendens" value="{{old_values.scientific_name}}"
+            name="scientific_name" class="form-control">
     </div>
     <div>
         <label class="form-label">Higher Classification: </label>
-        <input type="text" placeholder="e.g. Betta" name="higher_classification" class="form-control">
+        <input type="text" placeholder="e.g. Betta" value="{{old_values.higher_classification}}"
+            name="higher_classification" class="form-control">
     </div>
     <div>
         <label class="form-label">Picture Link</label>
-        <input type="text" placeholder="input an image URL here" name="fish_picture" class="form-control">
+        <input type="text" placeholder="input an image URL here" value="{{old_values.fish_picture}}" name="fish_picture"
+            class="form-control">
     </div>
     <div>
         <label class="form-label">Full grown size in cm: </label>
-        <input type="text" name="full_grown_size_in_cm" class="form-control">
+        <input type="text" value="{{old_values.full_grown_size_in_cm}}" name="full_grown_size_in_cm"
+            class="form-control">
     </div>
     <div>
         <label class="form-label">Reproduction</label>
-        <input type="text" name="reproduction" class="form-control">
+        <input type="text" value="{{old_values.reproduction}}" name="reproduction" class="form-control">
     </div>
     <div>
         <label class="form-label">Diet: </label>
         <select name="diet">
-            <option>Carnivore</option>
-            <option>Omnivore</option>
-            <option>Herbivore</option>
+            <option {%if old_values.diet == 'Carnivore'%} selected {%endif%}>Carnivore </option>
+            <option {%if old_values.diet == 'Omnivore'%} selected {%endif%}>Omnivore </option>
+            <option {%if old_values.diet == 'Herbivore'%} selected {%endif%}></option>Herbivore </option>
         </select>
     </div>
     <hr>
     <h3>Water Parameters:</h3>
     <div>
         <label class="form-label">Water Temperature in Deg C: </label>
-        <input type="text" name="water_temp_in_degc" class="form-control">
+        <input type="text" value="{{old_values.water_temp_in_degc}}" name="water_temp_in_degc" class="form-control">
     </div>
     <div>
         <label class="form-label">pH</label>
-        <input type="text" name="pH" class="form-control">
+        <input type="text" value="{{old_values.pH}}" name="pH" class="form-control">
     </div>
     <div>
         <label class="form-label">Tank Setup</label>
-        <input type="text" name="tank_setup_text" class="form-control">
+        <input type="text" value="{{old_values.tank_setup_text}}" name="tank_setup_text" class="form-control">
     </div>
     <input type="submit" value="Create" class="btn btn-primary my-3">
 </form>

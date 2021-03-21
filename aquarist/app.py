@@ -51,7 +51,7 @@ def show_all_fish():
 
 @app.route('/fish/create')
 def show_create_fish():
-    return render_template('create_fish.template.html')
+    return render_template('create_fish.template.html', old_values={})
 
 # route to process the form
 
@@ -122,7 +122,7 @@ def process_create_fish():
     else:
         return render_template('create_fish.template.html',
                                errors=errors,
-                               original_values=request.form)
+                               old_values=request.form)
 
 # DELETE
 # route to show the form for deletion
