@@ -228,6 +228,17 @@ def process_update_fish(fish_id):
         })
         flash(str(name) + " has been updated successfully")
         return redirect(url_for('show_all_fish'))
+    else:
+        fish_to_update = db.fish.find_one({
+            '_id': ObjectId(fish_id)
+        })
+        # merge both:
+        # retrieve from fish_to_update and replace with request.form
+        # **request.form will have priority over
+        old_values = {**fish_to_update, **request.form}
+        return render_template('show_update_fish.template.html',
+                                errors=errors,
+                                fish_to_update=old_values)
 
 
 # "magic code" -- boilerplate
