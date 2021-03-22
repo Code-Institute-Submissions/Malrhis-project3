@@ -1,6 +1,6 @@
 {% extends 'base.template.html' %}
 {%block title%}
-Create Fish Form
+Updating Fish Record
 {% endblock%}
 
 {%block content%}
@@ -65,7 +65,7 @@ Create Fish Form
         <label class="form-label">Tank Setup</label>
         <input type="text" value="{{fish_to_update.tank_setup_text}}" name="tank_setup_text" class="form-control">
     </div>
-    <input type="submit" value="Create" class="btn btn-primary my-3">
+    <input type="submit" value="Update" class="btn btn-primary my-3">
 </form>
 
 {% endblock %}
