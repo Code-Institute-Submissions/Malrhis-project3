@@ -251,6 +251,105 @@ def process_update_fish(fish_id):
                                fish_to_update=old_values)
 
 
+# PLANTS SECTION
+
+# READ
+# route to show all the plants
+
+
+@app.route('/plant')
+def show_all_plant():
+    name = request.args.get('name')
+
+    criteria = {}
+
+    if name:
+        criteria['name'] = {
+            "$regex": name,
+            "$options": 'i'
+        }
+
+    plant = db.plant.find(criteria)
+    return render_template('show_plant.template.html', plant=plant)
+
+# CREATE
+# route to show the form
+
+
+@app.route('/plant/create')
+def show_create_plant():
+    return render_template('create_plant.template.html', old_values={})
+
+# route to process the form
+
+
+@app.route('/plant/create', methods=["POST"])
+def process_create_plant():
+
+    name = request.form.get('name')
+    scientific_name = request.form.get('scientific_name')
+    plant_type = request.form.get('plant_type')
+    plant_picture = request.form.get('plant_picture')
+    full_grown_size_in_cm = request.form.get('full_grown_size_in_cm')
+    reproduction = request.form.get('reproduction')
+    water_temp_in_degc = request.form.get('water_temp_in_degc')
+    pH = request.form.get('pH')
+    plant_care_text = request.form.get('plant_care_text')
+
+    # Validate Form Entry in Backend app.py for create fish
+    errors = {}
+
+    if len(name) == 0:
+        errors['name_is_blank'] = "plant name cannot be blank"
+
+    if len(scientific_name) == 0:
+        errors['scientific_name_is_blank'] = "Scientific name cannot be blank"
+
+    if len(plant_picture) == 0:
+        errors['plant_picture_is_blank'] = "No plant pic URL was found"
+
+    if len(full_grown_size_in_cm) == 0:
+        errors['full_grown_size_is_blank'] = "No plant size was entered"
+    elif float(full_grown_size_in_cm) < 0:
+        errors['full_grown_size_is_negative'] = "plant Size cannot be negative"
+
+    if len(reproduction) == 0:
+        errors['reproduction_is_blank'] = "No reproduction method was entered"
+
+    if len(water_temp_in_degc) == 0:
+        errors['water_temp_is_blank'] = "No water temperature was entered"
+    elif float(water_temp_in_degc) < 0:
+        errors['water_temp_is_negative'] = "Water Temp cannot be negative"
+
+    if len(pH) == 0:
+        errors['pH_is_blank'] = "pH cannot be blank"
+    elif float(pH) < 0:
+        errors['pH_is_negative'] = "pH cannot be negative"
+
+    if len(pH) == 0:
+        errors['plant_care_text_is_blank'] = "No plant care text was entered"
+
+    # insert only ONE new documernt
+    if len(errors) == 0:
+        db.plant.insert_one({
+            "name": name,
+            "scientific_name": scientific_name,
+            "plant_type": plant_type,
+            "plant_picture": plant_picture,
+            "full_grown_size_in_cm": float(full_grown_size_in_cm),
+            "reproduction": reproduction,
+            "water_temp_in_degc": float(water_temp_in_degc),
+            "pH": float(pH),
+            "plant_care_text": plant_care_text
+        })
+        flash("A new plant has been added successfully!")
+        return redirect(url_for('show_all_plant'))
+    else:
+        return render_template('create_plant.template.html',
+                               errors=errors,
+                               old_values=request.form)
+
+
 # "magic code" -- boilerplate
 if __name__ == '__main__':
     app.run(host=os.environ.get('IP'),

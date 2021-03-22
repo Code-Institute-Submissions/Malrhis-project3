@@ -1,0 +1,55 @@
+{% extends 'base.template.html' %}
+{%block title%}
+Plant List
+{% endblock%}
+
+{%block content%}
+<h1>Plant List</h1>
+
+<form method="GET">
+    <div>
+        <input type="text" name="name" class="form-control" placeholder="Enter a plant name" />
+    </div>
+    <input type="submit" value="Search" class="btn btn-primary mt-3" />
+</form>
+
+<!-- button for redirecting to create plant -->
+
+<a href="{{url_for('show_create_plant')}}" class="btn btn-primary">Add Plant</a>
+
+<div class="row">
+
+    {%for each_plant in plant%}
+    <div class="card col-md-4">
+        <img class="card-img-top" src="{{each_plant.plant_picture}}" alt="Card image cap">
+        <div class="card-body">
+            <h5 class="card-title">{{each_plant.name}}</h5>
+            <p class="card-text my-0 text-muted">{{each_plant.scientific_name}}</p>
+            <p class="card-text my-0 text-muted">{{each_plant.plant_type}}</p>
+        </div>
+        <ul class="list-group list-group-flush">
+            <li class="list-group-item">Full-grown size: {{each_plant.full_grown_size_in_cm}} cm </li>
+            <li class="list-group-item">Reproduction: {{each_plant.reproduction}} </li>
+        </ul>
+        <div class="card-body">
+            <h5 class="card-title text-muted">Aquarium Setup</h5>
+            <p class="card-text my-0">Water Temp: {{each_plant.water_temp_in_degc}}°C</p>
+            <p class="card-text my-0">pH {{each_plant.pH}}</p>
+            <p class="card-text my-0 small">{{each_plant.plant_care_text}}</p>
+        </div>
+        <div class="card-footer">
+            <div class="container">
+                <div class="row">
+                    <div class="col">
+                        <a href="##" class="btn btn-danger">Delete</a>
+                        <a href="##"
+                            class="btn btn-success">Update</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% endfor%}
+</div>
+
+{% endblock %}
