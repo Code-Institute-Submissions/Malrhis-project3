@@ -378,7 +378,7 @@ def process_delete_plant(plant_id):
 # UPDATE
 # route to show the form for updating
 @app.route('/plant/<plant_id>/update')
-def show_update_fish(plant_id):
+def show_update_plant(plant_id):
     fish_to_update = db.plant.find_one({
         '_id': ObjectId(plant_id)
     })
