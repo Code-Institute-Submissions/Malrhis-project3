@@ -155,6 +155,7 @@ def process_delete_fish(fish_id):
     db.fish.delete_one({
         "_id": ObjectId(fish_id)
     })
+    flash("Fish has been deleted successfully!")
     return redirect(url_for('show_all_fish'))
 
 
@@ -348,6 +349,31 @@ def process_create_plant():
         return render_template('create_plant.template.html',
                                errors=errors,
                                old_values=request.form)
+
+
+# DELETE
+# route to show the form for deletion of plants
+
+
+@app.route('/plant/<plant_id>/delete')
+def delete_plant(plant_id):
+    # find the plant that we want to delete
+    plant = db.fish.find_one({
+        '_id': ObjectId(plant_id)
+    })
+
+    return render_template('confirm_delete_plant.template.html',
+                           plant_to_delete=plant)
+
+
+# route to process the deletion
+@app.route('/plant/<plant_id>/delete', methods=['POST'])
+def process_delete_plant(plant_id):
+    db.plant.delete_one({
+        "_id": ObjectId(plant_id)
+    })
+    flash("Plant has been deleted successfully!")
+    return redirect(url_for('show_all_plant'))
 
 
 # "magic code" -- boilerplate
