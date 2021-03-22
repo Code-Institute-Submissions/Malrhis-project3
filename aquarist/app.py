@@ -375,6 +375,95 @@ def process_delete_plant(plant_id):
     flash("Plant has been deleted successfully!")
     return redirect(url_for('show_all_plant'))
 
+# UPDATE
+# route to show the form for updating
+@app.route('/fish/<fish_id>/update')
+def show_update_fish(fish_id):
+    fish_to_update = db.fish.find_one({
+        '_id': ObjectId(fish_id)
+    })
+    return render_template('show_update_fish.template.html',
+                           fish_to_update=fish_to_update)
+
+# process the plant update
+
+
+@app.route('/plant/<plant_id>/update', methods=['POST'])
+def process_update_plant(plant_id):
+
+    name = request.form.get('name')
+    scientific_name = request.form.get('scientific_name')
+    plant_type = request.form.get('plant_type')
+    plant_picture = request.form.get('plant_picture')
+    full_grown_size_in_cm = request.form.get('full_grown_size_in_cm')
+    reproduction = request.form.get('reproduction')
+    water_temp_in_degc = request.form.get('water_temp_in_degc')
+    pH = request.form.get('pH')
+    plant_care_text = request.form.get('plant_care_text')
+
+    # Validate Form Entry in Backend app.py for update plant
+    errors = {}
+
+    if len(name) == 0:
+        errors['name_is_blank'] = "plant name cannot be blank"
+
+    if len(scientific_name) == 0:
+        errors['scientific_name_is_blank'] = "Scientific name cannot be blank"
+
+    if len(plant_picture) == 0:
+        errors['plant_picture_is_blank'] = "No plant pic URL was found"
+
+    if len(full_grown_size_in_cm) == 0:
+        errors['full_grown_size_is_blank'] = "No plant size was entered"
+    elif float(full_grown_size_in_cm) < 0:
+        errors['full_grown_size_is_negative'] = "plant Size cannot be negative"
+
+    if len(reproduction) == 0:
+        errors['reproduction_is_blank'] = "No reproduction method was entered"
+
+    if len(water_temp_in_degc) == 0:
+        errors['water_temp_is_blank'] = "No water temperature was entered"
+    elif float(water_temp_in_degc) < 0:
+        errors['water_temp_is_negative'] = "Water Temp cannot be negative"
+
+    if len(pH) == 0:
+        errors['pH_is_blank'] = "pH cannot be blank"
+    elif float(pH) < 0:
+        errors['pH_is_negative'] = "pH cannot be negative"
+
+    if len(pH) == 0:
+        errors['plant_care_text_is_blank'] = "No plant care text was entered"
+
+    if len(errors) == 0:
+        db.fish.update_one({
+            "_id": ObjectId(plant_id)
+        }, {
+            "$set": {
+                "name": name,
+                "scientific_name": scientific_name,
+                "plant_type": plant_type,
+                "plant_picture": plant_picture,
+                "full_grown_size_in_cm": float(full_grown_size_in_cm),
+                "reproduction": reproduction,
+                "water_temp_in_degc": float(water_temp_in_degc),
+                "pH": float(pH),
+                "plant_care_text": plant_care_text
+            }
+        })
+        flash(str(name) + " has been updated successfully")
+        return redirect(url_for('show_all_plant'))
+    else:
+        plant_to_update = db.plant.find_one({
+            '_id': ObjectId(plant_id)
+        })
+        # merge both:
+        # retrieve from fish_to_update and replace with request.form
+        # **request.form will have priority over
+        old_values = {**plant_to_update, **request.form}
+        return render_template('show_update_plant.template.html',
+                               errors=errors,
+                               plant_to_update=old_values)
+
 
 # "magic code" -- boilerplate
 if __name__ == '__main__':
