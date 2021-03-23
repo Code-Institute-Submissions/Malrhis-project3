@@ -4,19 +4,30 @@ Plant List
 {% endblock%}
 
 {%block content%}
-<h1>Plant List</h1>
+<div class="py-5 text-center">
+    <img class="d-block mx-auto mb-3" src="{{ url_for('static', filename='logo1.png') }}" alt="" width="57" height="57">
+    <h2>Aquatic Plant Repository</h2>
+    <p class="lead">All the plants aquarists have contributed. In one place.</p>
+</div>
 
 <form method="GET">
-    <div>
-        <input type="text" name="name" class="form-control" placeholder="Enter a plant name" />
+    <div class="form">
+        <div class="col-auto mb-3">
+            <input type="text" name="name" class="form-control " placeholder="Enter a Plant Name" />
+        </div>
+        <div class="form-group col-auto">
+            <input type="submit" value="Search" class="btn btn-primary col-12" />
+        </div>
     </div>
-    <input type="submit" value="Search" class="btn btn-primary mt-3" />
 </form>
 
+<hr class="my-3">
 <!-- button for redirecting to create plant -->
 
-<a href="{{url_for('show_create_plant')}}" class="btn btn-primary">Add Plant</a>
+<label class="my-3 col-6 mx-0 text-center">Adding a New Plant to the Repository?</label>
+<a href="{{url_for('show_create_plant')}}" class="btn btn-primary col-5 mx-0">Click to Add Plant</a>
 
+<hr class="my-3">
 <div class="row">
 
     {%for each_plant in plant%}
@@ -41,7 +52,8 @@ Plant List
             <div class="container">
                 <div class="row">
                     <div class="col">
-                        <a href="{{ url_for('delete_plant', plant_id=each_plant._id )}}" class="btn btn-danger">Delete</a>
+                        <a href="{{ url_for('delete_plant', plant_id=each_plant._id )}}"
+                            class="btn btn-danger">Delete</a>
                         <a href="{{ url_for('show_update_plant', plant_id=each_plant._id )}}"
                             class="btn btn-success">Update</a>
                     </div>
