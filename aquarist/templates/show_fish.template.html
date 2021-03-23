@@ -4,19 +4,30 @@ Fish List
 {% endblock%}
 
 {%block content%}
-<h1>Fish List</h1>
+<div class="py-5 text-center">
+    <img class="d-block mx-auto mb-3" src="{{ url_for('static', filename='logo1.png') }}" alt="" width="57" height="57">
+    <h2>Fish Trove</h2>
+    <p class="lead">All the fishes hobbyists have contributed. In one place.</p>
+</div>
 
 <form method="GET">
-    <div>
-        <input type="text" name="name" class="form-control" placeholder="Enter a Fish Name" />
+    <div class="form">
+        <div class="col-auto mb-3">
+            <input type="text" name="name" class="form-control " placeholder="Enter a Fish Name" />
+        </div>
+        <div class="form-group col-auto">
+            <input type="submit" value="Search" class="btn btn-primary col-12" />
+        </div>
     </div>
-    <input type="submit" value="Search" class="btn btn-primary mt-3" />
 </form>
 
+<hr class="my-3">
 <!-- button for redirecting to create fish -->
 
-<a href="{{url_for('show_create_fish')}}" class="btn btn-primary">Add Fish</a>
+<label class="my-3 col-6 mx-0 text-center">Adding a New Fish to the Trove?</label>
+<a href="{{url_for('show_create_fish')}}" class="btn btn-primary col-5 mx-0">Click to Add Fish</a>
 
+<hr class="my-3">
 <div class="row">
 
     {%for each_fish in fish%}
