@@ -13,53 +13,58 @@ Create Fish Form
 </div>
 {%endif%}
 
-<h1>Add New Aquatic Plant Entry</h1>
+<div class="py-4 text-center">
+    <img class="d-block mx-auto mb-3" src="{{ url_for('static', filename='logo1.png') }}" alt="" width="57" height="57">
+    <h2>Add New Aquatic Plant Entry</h2>
+    <p class="lead">Contribute to the Plant Repository</p>
+</div>
 
 <form method="POST">
-    <div>
+    <div class="form-group mb-3">
         <label class="form-label">Name:</label>
         <input type="text" placeholder="Name of your plant" name="name" value="{{old_values.name}}"
             class="form-control">
     </div>
-    <div>
+    <div class="form-group mb-3">
         <label class="form-label">Scientific Name </label>
         <input type="text" placeholder="e.g. Rotala Rotundifolia" value="{{old_values.scientific_name}}"
             name="scientific_name" class="form-control">
     </div>
-    <div>
+    <div class="form-group mb-3">
         <label class="form-label">Plant Type: </label>
-        <select name="plant_type">
+        <select class="form-select" name="plant_type">
             <option {%if old_values.plant_type == 'Floating'%} selected {%endif%}>Floating</option>
             <option {%if old_values.plant_type == 'Water Column'%} selected {%endif%}>Water Column</option>
-            <option {%if old_values.plant_type == 'Planted In Substrate'%} selected {%endif%}>Planted In Substrate</option>
+            <option {%if old_values.plant_type == 'Planted In Substrate'%} selected {%endif%}>Planted In Substrate
+            </option>
         </select>
     </div>
-    <div>
+    <div class="form-group mb-3">
         <label class="form-label">Picture Link</label>
         <input type="text" placeholder="input an image URL here" value="{{old_values.plant_picture}}"
             name="plant_picture" class="form-control">
     </div>
-    <div>
+    <div class="form-group mb-3">
         <label class="form-label">Full grown size in cm: </label>
         <input type="text" value="{{old_values.full_grown_size_in_cm}}" name="full_grown_size_in_cm"
             class="form-control">
     </div>
-    <div>
+    <div class="form-group mb-3">
         <label class="form-label">Reproduction</label>
         <input type="text" value="{{old_values.reproduction}}" placeholder="fragmenting, rhizome etc."
             name="reproduction" class="form-control">
     </div>
     <hr>
     <h3>Water Parameters:</h3>
-    <div>
+    <div class="form-group mb-3">
         <label class="form-label">Water Temperature in Deg C: </label>
         <input type="text" value="{{old_values.water_temp_in_degc}}" name="water_temp_in_degc" class="form-control">
     </div>
-    <div>
+    <div class="form-group mb-3">
         <label class="form-label">pH</label>
         <input type="text" value="{{old_values.pH}}" name="pH" class="form-control">
     </div>
-    <div>
+    <div class="form-group mb-3">
         <label class="form-label">Plant Care</label>
         <input type="text" value="{{old_values.plant_care_text}}" name="plant_care_text" class="form-control">
     </div>
