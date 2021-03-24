@@ -4,14 +4,20 @@ Delete Fish
 {% endblock%}
 
 {%block content%}
-<h1>Delete {{fish_to_delete.name}}</h1>
+<div class="py-4 text-center">
+    <img class="d-block mx-auto mb-3" src="{{ url_for('static', filename='logo1.png') }}" alt="" width="57" height="57">
+    <h2>Delete {{fish_to_delete.name}}</h2>
+    <p class="lead">Remove an entry from the Fish Trove</p>
+</div>
 <form method="POST">
     <div class="alert alert-danger">
         Are you sure you want to delete {{fish_to_delete.name}}?
     </div>
-    <div>
-        <input type="submit" value="Delete" class="btn btn-danger">
-        <a href="{{url_for('show_all_fish')}}" class="btn btn-success">No don't Delete</a>
+    <div class="container">
+        <div class="row">
+            <input type="submit" value="Delete" class="btn btn-danger px-0 mx-auto col-5">
+            <a href="{{url_for('show_all_fish')}}" class="btn btn-success px-0 mx-auto col-5">No, don't Delete</a>
+        </div>
     </div>
 </form>
 {% endblock %}

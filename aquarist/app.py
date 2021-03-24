@@ -358,7 +358,7 @@ def process_create_plant():
 @app.route('/plant/<plant_id>/delete')
 def delete_plant(plant_id):
     # find the plant that we want to delete
-    plant = db.fish.find_one({
+    plant = db.plant.find_one({
         '_id': ObjectId(plant_id)
     })
 
@@ -377,6 +377,8 @@ def process_delete_plant(plant_id):
 
 # UPDATE
 # route to show the form for updating
+
+
 @app.route('/plant/<plant_id>/update')
 def show_update_plant(plant_id):
     plant_to_update = db.plant.find_one({
