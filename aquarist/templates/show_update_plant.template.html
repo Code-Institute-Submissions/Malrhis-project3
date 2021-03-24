@@ -13,50 +13,56 @@ Updating Plant Record
 </div>
 {%endif%}
 
-<h1>Updating:{{plant_to_update.name}}</h1>
+<div class="py-4 text-center">
+    <img class="d-block mx-auto mb-3" src="{{ url_for('static', filename='logo1.png') }}" alt="" width="57" height="57">
+    <h2>Updating:{{plant_to_update.name}}</h2>
+    <p class="lead">Contribute to the Repository</p>
+</div>
 
 <form method="POST">
-    <div>
+    <div class="form-group mb-3">
         <label class="form-label">Name:</label>
         <input type="text" name="name" value="{{plant_to_update.name}}" class="form-control">
     </div>
-    <div>
+    <div class="form-group mb-3">
         <label class="form-label">Scientific Name </label>
         <input type="text" name="scientific_name" value="{{plant_to_update.scientific_name}}" class="form-control">
     </div>
-    <div>
+    <div class="form-group mb-3">
         <label class="form-label">Plant Type: </label>
-        <select name="plant_type">
+        <select class="form-select" name="plant_type">
             <option {%if plant_to_update.plant_type == 'Floating'%} selected {%endif%}>Floating</option>
             <option {%if plant_to_update.plant_type == 'Water Column'%} selected {%endif%}>Water Column</option>
-            <option {%if plant_to_update.plant_type == 'Planted In Substrate'%} selected {%endif%}>Planted In Substrate</option>
+            <option {%if plant_to_update.plant_type == 'Planted In Substrate'%} selected {%endif%}>Planted In Substrate
+            </option>
         </select>
     </div>
-    <div>
+    <div class="form-group mb-3">
         <label class="form-label">Picture Link</label>
         <input type="text" placeholder="input an image URL here" value="{{plant_to_update.plant_picture}}"
             name="plant_picture" class="form-control">
     </div>
-    <div>
+    <div class="form-group mb-3">
         <label class="form-label">Full grown size in cm: </label>
         <input type="text" name="full_grown_size_in_cm" value="{{plant_to_update.full_grown_size_in_cm}}"
             class="form-control">
     </div>
-    <div>
+    <div class="form-group mb-3">
         <label class="form-label">Reproduction</label>
         <input type="text" value="{{plant_to_update.reproduction}}" name="reproduction" class="form-control">
     </div>
     <hr>
     <h3>Water Parameters:</h3>
-    <div>
+    <div class="form-group mb-3">
         <label class="form-label">Water Temperature in Deg C: </label>
-        <input type="text" value="{{plant_to_update.water_temp_in_degc}}" name="water_temp_in_degc" class="form-control">
+        <input type="text" value="{{plant_to_update.water_temp_in_degc}}" name="water_temp_in_degc"
+            class="form-control">
     </div>
-    <div>
+    <div class="form-group mb-3">
         <label class="form-label">pH</label>
         <input type="text" value="{{plant_to_update.pH}}" name="pH" class="form-control">
     </div>
-    <div>
+    <div class="form-group mb-3">
         <label class="form-label">Plant Care</label>
         <input type="text" value="{{plant_to_update.plant_care_text}}" name="plant_care_text" class="form-control">
     </div>
