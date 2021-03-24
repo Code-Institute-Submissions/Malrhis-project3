@@ -437,7 +437,7 @@ def process_update_plant(plant_id):
         errors['plant_care_text_is_blank'] = "No plant care text was entered"
 
     if len(errors) == 0:
-        db.fish.update_one({
+        db.plant.update_one({
             "_id": ObjectId(plant_id)
         }, {
             "$set": {
