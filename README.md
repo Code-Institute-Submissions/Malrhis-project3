@@ -1,13 +1,14 @@
 # Start of the aquarist's resource
 
-# <img style="height:150px" src="" > Aquarist's Resource
+# <img style="height:150px" src="" > Aquarist's Resource (Freshwater Ver.)
 
 # 1. Background & Objective
 ## Background / Problem Statement
-In the world of fishkeeping and aquatic plant keeping, knowledge is often passed by word of mouth. Much of the information found on the web is contributed by hobbyist knowhow.
+In the world of fishkeeping and aquatic plant keeping, knowledge is often passed by word of mouth. Much of the information found on the web is contributed by hobbyist know-how. 
 
-As a fish hobbyist myself, knowledge is crucial when it comes to keeping fish and plants alive in your planted tank. 
-Especially if you want a beautiful aquascape that mimics nature.
+As a passionate fish hobbyist myself, knowledge is crucial when it comes to keeping fish and plants alive in your planted tank; especially if you want a beautiful aquascape that mimics nature.
+
+The problem is that a lot of the information is scattered across long winded articles and in google search results, and there's no single source of information that can give you something bite-sized at a glance.
 
 This site will serve as a flexible data repository for anyone who wants to contribute new plant genuses/variations that have entered the aquarium trade, new fish that may have just come into your local live fish store (LFS) that you might have never seen before. Perhaps it came from the amazon river, and you have no clue what sort of water they like. 
 
@@ -25,18 +26,29 @@ Key Data points For Fish:
 4. Reproduction type
 5. Diet
 6. Water parameters - Temp, pH
+7. Miscellaneous Tank setup tips
+
+Key Data points For Aquatic Plants:
+1. Plant Name
+2. Scientific Name
+3. Plant full-grown size (crucial for tank size planning)
+4. Reproduction type
+5. Water parameters - Temp, pH
+6. Miscellaneous tank setup tips
+
+There would be less data points for plants because all plants basically have the same diet. CO2, sunlight and nutrients from the soil/water column
 
 ## Purpose and Value to users
 
-1. One stop to see all pokemon in one place
-2. Immediate display of sprites and pokedex entries tell a story of all pokemon, even those that the use may not know
-3. Typing and movesets allow the user to put together a party of 6
-4. User can come back even after leaving the website, to view the pokemon that they have selected, and even the moves that they have already selected.
+1. One stop to see all contributed fish and plants in one place
+2. Immediately display existing fish/plants in repository in case user is just browsing
+3. Users can correct entries if they feel that the information is lacking or misleading
+4. User can contribute new fish if they want to, and share the website link to other users. 
 
 <br>
 
-# 2. Demo (Github Pages)
-Site is published via github pages and can be viewed [here](https://malrhis.github.io/Project-2-codeinstitute/)
+# 2. Demo (Heroku)
+Site is published via Heroku and can be viewed [here](#)
 
 <br>
 
@@ -44,27 +56,31 @@ Site is published via github pages and can be viewed [here](https://malrhis.gith
 - HTML
 - CSS
 - Bootstrap 4
-- Javascript
-- Jquery
-- Jquesry UI
+- Jinja2 web template engine
+- Python
+- Flask framework
+- MongoDB
+
+## 3.1 Dependencies installed with pip (python's package manager)
+- flask
+- pymongo
+- dnspython
+- python-dotenv
 
 <br>
 
 # 4. The Goals: User Stories or (JTBD) Jobs-to-be-Done
 
-For the players of pokemon games, or fans who want to be able to search for the full breadth of the pokemon franchise:
+For the freshwater aquarist in search of crowdsourced know-how:
 
 ```
-1. I want to be able to search for a pokemon by name, instead of going through the clunky gameboy/switch keypad
-2. I want to be able to view all pokemon across all the game versions.
-3. The pokedex in the pokemon games does not give you enough information about the pokemon in a single screen. For instance, it does not tell you the stats of the pokemon:
-    - I want to be able to see a sprite of the pokemon
-    - I want to be able to see the type/types of the pokemon
-    - I want to be able to see the ability that the pokemon has, and if the pokemon has a hidden ability, I want that to be displayed
-    - I want to be able to read about the pokemon's genus and pokedex entry
-    - I want to know what moves does the pokemon have
-4. I want to be able to save my pokemon so that I can refer to them later
-5. I want to be able to build a mock-up team
+1. I want to be able to search a fish or plant by name, rather than go article by article in a google search
+2. I want to be able to view all fish/plants at a glance, and browse the pages for my enjoyment/learning
+3. I want to be able to contribute my own knowledge about a fish/plant to the repository
+    - The repository should provide some validation and formatting, especially when it comes to things like fish size, diet, water pH and temperature
+    - At the same time, I should be allowed to input as much free text as required to ensure that I can impart my guidance to others in the aquarist community.
+4. I want to be able to update/delete entries that might be fraudulent or fake
+5. The site should be mobile responsive so that I can share it on the go with fellow hobbyists.
 ```
 <br>
 
@@ -364,13 +380,7 @@ If not, repeat to ensure that deploying of code is error free and is working in 
 - Mr Arif Rawi - HTML and CSS instructor
 - Mr Paul Kunxin Chor - Who guided us on logics for Javascript
 - Mr Shun - Teaching assistant, who supported this project by holding consultation sessions
-## Dependencies
 
-```
-pip3 install flask
-pip3 install pymongo
-pip3 install dnspython
-pip3 install python-dotenv
 ```
 
 ## Setup
