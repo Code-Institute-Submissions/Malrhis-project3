@@ -4,15 +4,15 @@
 
 # 1. Background & Objective
 ## Background / Problem Statement
-In the world of fishkeeping and aquatic plant keeping, knowledge is often passed by word of mouth. Much of the information found on the web is contributed by hobbyist know-how. 
+- In the world of fishkeeping and aquatic plant keeping, knowledge is often passed by word of mouth. Much of the information found on the web is contributed by hobbyist know-how. 
 
-As a passionate fish hobbyist myself, knowledge is crucial when it comes to keeping fish and plants alive in your planted tank; especially if you want a beautiful aquascape that mimics nature.
+- As a passionate fish hobbyist myself, knowledge is crucial when it comes to keeping fish and plants alive in your planted tank; especially if you want a beautiful aquascape that mimics nature.
 
-The problem is that a lot of the information is scattered across long winded articles and in google search results, and there's no single source of information that can give you something bite-sized at a glance.
+- The problem is that a lot of the information is scattered across long winded articles and in google search results, and there's no single source of information that can give you something bite-sized at a glance.
 
-This site will serve as a flexible data repository for anyone who wants to contribute new plant genuses/variations that have entered the aquarium trade, new fish that may have just come into your local live fish store (LFS) that you might have never seen before. Perhaps it came from the amazon river, and you have no clue what sort of water they like. 
+- This site will serve as a flexible data repository for anyone who wants to contribute new plant genuses/variations that have entered the aquarium trade, new fish that may have just come into your local live fish store (LFS) that you might have never seen before. Perhaps it came from the amazon river, and you have no clue what sort of water they like. 
 
-I hope here is where aquarists will find the information they need to keep their beloved tanks healthy and running.
+- I hope here is where aquarists will find the information they need to keep their beloved tanks healthy and running.
 
 ## Objective
 Design a website that collects information from hobbyists about fish and plants, and displays them to the aquarist community in a digestible/searchable manner for them to access and update the information.
@@ -94,22 +94,20 @@ For the freshwater aquarist in search of crowdsourced know-how:
 ## 5.1 Feature List
 |# | Name          | Description   |     
 | -| ------------- |-------------|
-|1 |Pokemon API retrieval|via [PokeAPI](https://pokeapi.co/)| 
-|2 |Autocomplete Search Bar for Pokedex| Using https://pokeapi.co/api/v2/pokemon/| 
-|3 | Navigation Bar with Anchor links within page |       | 
-|4 | Retrieval of Pokemon Genus & Flavour Text | https://pokeapi.co/api/v2/pokemon-species/| 
-|5 | Extraction of pokemon moves |via [PokeAPI](https://pokeapi.co/)| 
-|6 | Storage of Pokemon into LocalStorage | Inclusive of pokemon stats and moveset|
-|7 | Retrieval of stored pokemon | Up to 6 pokemon can be saved|
+|1 | Search Bar for Fish or Plants |Entering partial string returns all instances of matching characters| 
+|2 | Landing Page to display fish/plants that are stored| Display fish/plants documents in mongoDB fish/plant collection| 
+|3 | Navigation Bar |  Simple Nav-bar that points to both fish and plants landing page     | 
+|4 | Create Fish/Plants Form | Form for user to input information to be stored as key-value pairs in mongoDB | 
+|5 | Delete Fish/Plants Form | Option to delete fish/plants document using ObjectID as identifier in mongoDB collection | 
+|6 | Update Fish/Plants Form | Update existing values of fish/plants collection's document using ObjectID to extract from mongoDB and store new values |
+|7 | Form Validations | Prevent empty values, nonsense values (e.g. negative size of fish) |
 <br>
 
 # 6. Prototyping
 Simple Prototyping was done directly using MS Powerpoint to mock-up the features of the website.
 
 Reference was taken from:
-- [The official Pokemon website's pokedex](https://sg.portal-pokemon.com/play/pokedex)
-- [Original Pokedex design](https://bulbapedia.bulbagarden.net/wiki/Pok%C3%A9dex)
-- [Party Pokemon List of the Pokemon Games](https://bulbapedia.bulbagarden.net/wiki/Party)
+- 
 
 ## 6.1 Front-End UI Mock-up
 <img style="height:400px" src="images/mockup-1.png" >
@@ -126,46 +124,11 @@ The final design aims to provide a solution to all user stories listed in `secti
 <img style="height:300px" src="images/design-1.png" >
 
 ```
-1. I want to be able to search for a pokemon by name, instead of going through the clunky gameboy/switch keypad
-2. I want to be able to view all pokemon across all the game versions.
-```
-
-### 6.2.2 Search Result Section
-<img style="height:400px" src="images/design-2.png" >
-
-```
-2. I want to be able to view all pokemon across all the game versions.
-3. The pokedex in the pokemon games does not give you enough information about the pokemon in a single screen. For instance, it does not tell you the stats of the pokemon:
-    - I want to be able to see a sprite of the pokemon
-    - I want to be able to see the type/types of the pokemon
-    - I want to be able to see the ability that the pokemon has, and if the pokemon has a hidden ability, I want that to be displayed
-    - I want to be able to read about the pokemon's genus and pokedex entry
-    - I want to know what moves does the pokemon have
-```
-
-### 6.2.3 Saving Module Section
-<img style="height:400px" src="images/design-3.png" >
-
-```
-4. I want to be able to save my pokemon so that I can refer to them later
-```
-
-### 6.2.4 Party Pokemon Section
-<img style="height:400px" src="images/design-4.png" >
-
-```
-3. The pokedex in the pokemon games does not give you enough information about the pokemon in a single screen. For instance, it does not tell you the stats of the pokemon:
-    - I want to be able to see a sprite of the pokemon
-    - I want to be able to see the type/types of the pokemon
-    - I want to be able to see the ability that the pokemon has, and if the pokemon has a hidden ability, I want that to be displayed
-    - I want to be able to read about the pokemon's genus and pokedex entry
-    - I want to know what moves does the pokemon have
-4. I want to be able to save my pokemon so that I can refer to them later
-5. I want to be able to build a mock-up team
+#
 ```
 
 ## 6.3 Colour
-Something  closer to  the original pokedex colour palette was chosen to enable familiarity in users
+#
 ```
 For the Red: #c83033
 For the Gray: #6c757d
