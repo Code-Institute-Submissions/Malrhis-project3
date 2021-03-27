@@ -85,7 +85,7 @@ For the freshwater aquarist in search of crowdsourced know-how:
 <br>
 
 # 5. Key Features
-- Pokemon API retrieval via [PokeAPI](https://pokeapi.co/)
+- Homepage to redirect to Fish or Plant repository
 - Local storage using javascript to remember previous pokemon choices and store them in 6 slots
 - Auto-complete dropdown to help with users who might not know how to spell the full pokemon name in the search bar
 - Form submit, information display and information storage in Local Storage
