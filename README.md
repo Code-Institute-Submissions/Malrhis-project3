@@ -1,6 +1,6 @@
 # Start of the aquarist's resource
 
-# <img style="height:150px" src="" > Aquarist's Resource (Freshwater Ver.)
+# <img style="height:150px" src="static/brand-logo.png" > Aquarist's Resource (Freshwater Ver.)
 
 # 1. Background & Objective
 ## Background / Problem Statement
@@ -106,25 +106,30 @@ For the freshwater aquarist in search of crowdsourced know-how:
 # 6. Prototyping
 Simple Prototyping was done directly using MS Powerpoint to mock-up the features of the website.
 
-Reference was taken from:
-- 
-
 ## 6.1 Front-End UI Mock-up
-<img style="height:400px" src="images/mockup-1.png" >
-<img style="height:400px" src="images/mockup-2.png" >
+<img style="height:400px" src="static/mock-up/home-mockup.png" >
+<img style="height:400px" src="static/mock-up/show-fish-mockup.png" >
+<img style="height:400px" src="static/mock-up/create-update-fish-mockup.png" >
+<img style="height:400px" src="static/mock-up/delete-fish-mockup.png" >
 
-Reference was taken from the original design of the very first pokdex art from generation 1 of the pokemon games:
-
-<img style="height:100px" src="images/pokedex-pic-1.png">
+Reference was taken from
+- [Checkout form example](https://getbootstrap.com/docs/4.0/examples/checkout/) from Bootstrap 4
 
 ## 6.2 Actual Final Design
 The final design aims to provide a solution to all user stories listed in `section 4 The Goals: User Stories or (JTBD) Jobs-to-be-Done` 
 
 ### 6.2.1 Search Section
-<img style="height:300px" src="images/design-1.png" >
+<img style="height:300px" src="static/mock-up/show-fish-mockup.png" >
 
 ```
-#
+1. I want to be able to search a fish or plant by name, rather than go article by article in a google search
+```
+
+### 6.2.2 Display Fish/Plant Section
+<img style="height:300px" src="static/mock-up/show-fish-mockup.png" >
+
+```
+2. I want to be able to view all fish/plants at a glance, and browse the pages for my enjoyment/learning
 ```
 
 ## 6.3 Colour
