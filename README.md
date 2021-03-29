@@ -230,28 +230,57 @@ List of validation logics used:
         {% endblock %}
 ```
 
-### 7.5 Deleting fish/plant document
+## 7.5 Deleting fish/plant document
+* one route to view the delete form
+* another route to process the removal of the document
+* `'_id': ObjectId(fish_id)` was used to determine the specific document to be deleted
+* flash message was used to notify delete success
+    * `flash("Fish has been deleted successfully!")
 
+## 7.6 Updating fish/plant document
+* one route to view the update form
+* another route to process new `key-value` pairs being passed to `mongoDB`
 
+### 7.6.1 Update process validation
+- Validation was done similar to checks used in `7.4.1`
+
+### 7.6.2 Combining `old values` and `error values` when returning errors to `update form` in front end
+```
+# merge both:
+# retrieve from fish_to_update and replace with request.form
+# request.form will have priority over old values
+
+old_values = {**fish_to_update, **request.form}
+```
+7.7 Plants and Fish different collection handling
+- fish are stored in `fish` collection in mongoDB
+- plants are stored in `plant` collection in mongoDB
+- `@app.route` used for `fish` are repeated for `plants`
+- Jinja2 templates are re-created for `plants`
 
 # 8. Bootstrap 4 Implementation
 - Bootstrap 4 was used for re-building the website in a responsive, mobile-first manner. You can access Boostrap 4 resouces [here](https://getbootstrap.com/docs/4.5/getting-started/introduction/)
 
-The below `code snippets` were added to HTML `<head>`
-
-- For CSS
+The below `code snippets` were added to the HTML in `base.template.html` to invoke the boostrap framework
 ```
-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
 
-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx" crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
 ```
 
 <br>
 
 # 10. Content Credits
-## Images of pokemon
+## Fish content, writeups, actual water parameters
+- https://www.seriouslyfish.com/
 
-## 
+## Images
+- https://unsplash.com/
+
 
 <br>
 
