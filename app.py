@@ -47,6 +47,7 @@ def show_all_fish():
     page = request.args.get('page')
     # pass length of fish collection
     count_fish = db.fish.count_documents({})
+    # get last page based on collection length
     last_page = math.ceil(count_fish/12)-1
 
     if page is None:
@@ -278,6 +279,8 @@ def show_all_plant():
     page = request.args.get('page')
     # pass length of plant collection
     count_plant = db.plant.count_documents({})
+    # get last page based on collection length
+    last_page = math.ceil(count_plant/12)-1
 
     if page is None:
         page = 0
@@ -295,7 +298,9 @@ def show_all_plant():
 
     plant = db.plant.find(criteria).skip(page*12).limit(12)
     return render_template('show_plant.template.html',
-                           plant=plant, page=page, count_plant=count_plant)
+                           plant=plant, page=page,
+                           count_plant=count_plant,
+                           last_page=last_page)
 
 # CREATE
 # route to show the form
