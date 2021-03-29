@@ -48,7 +48,7 @@ There would be less data points for plants because all plants basically have the
 <br>
 
 # 2. Demo (Heroku)
-Site is published via Heroku and can be viewed [here](#)
+Site is published via Heroku and can be viewed [here](https://aquarist-resource.herokuapp.com/)
 
 <br>
 
