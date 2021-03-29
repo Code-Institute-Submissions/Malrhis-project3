@@ -135,102 +135,107 @@ The final design aims to provide a solution to all user stories listed in `secti
 ## 6.3 Colour
 #
 ```
-For the Red: #c83033
-For the Gray: #6c757d
+For the green: #289296
 ```
 <br>
 
 # 7. Detailed Features Write-up
 ## 7.1 Search Bar
-- Implemented using [Jquery UI Autocomplete Widget](https://jqueryui.com/autocomplete/)
-- List of pokemon were generated using https://pokeapi.co/api/v2/pokemon/ 
-- Array of pokemon that were returned from the endpoint were handled using the `.map()` method to access the nested `names` of the pokemon ([Link to resource](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/map))
+- Implemnted using `$regex` mongo query to obtain matching
+- option `i` was used to make query insensitive to letter casing
 
 ## 7.1.1 Search Bar Validation
-- If a non-existing pokemon name is entered, an alert will appear to the user saying `"Please enter a real pokemon"`
-- check was done using `.fail()` to check if `response.status == "404"`
+- simple if function to prevent empty string from being processed
 
-## 7.2 Preview Pokemon
-* Return the following from `https://pokeapi.co/api/v2/pokemon/{pokemon name}`
-  * Pokemon Sprite
-  * Pokemon Name
-  * Pokemon Type
-  * Pokemon Stats
-  * Pokemon Moves
-  * Pokemon Abilities
+## 7.2 Fish/Plant display
+-  use mongo query to display based on text entered into search bar
 
-* Return the following from `https://pokeapi.co/api/v2/pokemon-species/{pokemon name}`
-  *  Pokemon Genus
-  *  Pokemon Flavor Text
+## 7.3 Pagination of Fish/Plant display
+- Pagination was handled by applying the condition of `skip()` and `limit()` into the query criteria when calling the `show_all_fish` function.
+- `page` value was passed using `GET` method from front end
+- if no `page` value exists, return `0` so that 1st page is displayed.
 
-* Display all data returned from API using `.html()` method. 
-
-## 7.2.1 Stats Bar
-* Stats are displayed using using [Jquery UI Progressbar widget](https://jqueryui.com/progressbar/)
-* As the value of the bar is set at `"100"`, and pokemon stats can go up to `>200`, the stats were scaled back to a base of `100` before using `.progressbar()` to create the progressbar in the pokemon card
-
-## 7.2.2 Array manipulation for Pokemon Moves and flavor text
-* Pokemon Moves in the response from `https://pokeapi.co/api/v2/pokemon/{pokemon name}` were nested. `.map()` was used to return an array of move names instead of the original objects
-
-* Pokemon Flavor text was embedded in the `https://pokeapi.co/api/v2/pokemon-species/{pokemon name}` endpoint's response array. 
-  * in order to extract only the english pokedex flavor text, the `.find()` method was used ([Link to resource](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/find))
-  ```
-   .find(function (x) {
-              return x.language.name == "en";
-            }
-  ```
-
-* Pokemon Flavor Text had odd characters
-  ```
-  "Spits fire that\nis hot enough to\nmelt boulders.\u000cKnown to cause\nforest fires\nunintentionally."
-  ```
-  * These had to be removed using the `.replace()` method ([Link to resource](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/replace))
-  ```
-  .flavor_text.replace(/\r\n|\n|\r|/gm, " ")}"`);
-  ```
-  * "" character was also found in the response from the API, and had to be removed from the flavor text upon further testing.
-
-## 7.2.3 Pokemon Move selection: double-entry validation 
-In the event user selects the same move again from the dropdown of the moves, an alert will appear telling the user that the `"Move has already been selected"` The user will be blocked from adding that move to the movelist of the pokemon
-
-## 7.2.4 Pokemon Abilities
-In the event that pokemon have a hidden ability, the `getpokemon()` function used to display pokemon, as well as the handling of the initial API call for `Preview Pokemon` will check if there's a hidden ability
+Sample logic:
 ```
-if (pokemonPreview.abilities[1]) {
-          $(`.pokemon-${x}-ability`).html(
-            `Ability: ${pokemonPreview.abilities[0].ability.name} 
-          <br> Hidden Ability: ${pokemonPreview.abilities[1].ability.name}`
-          );
-        } else {
-          $(`.pokemon-${x}-ability`).html(
-            `Ability 1: ${pokemonPreview.abilities[0].ability.name}`
-          );
-        }
+fish = db.fish.find(criteria).skip(page*12).limit(12)
 ```
 
+## 7.3.1 `Next` and `Previous` `Page` Button handling
+- counted `number of pages` based on `count of collection documents` / preferred number of fish per page (12 in this case) to arrive at `last page`
 
-## 7.2.5 Saving Pokemon into party of 6
-Once any of the 6 buttons have been clicked to save the pokemon, both the movesets that have been chosen, the pokemon array and the pokemon species array would be saved into localStorage, and immediately displayed using the `getpokemon()` function. 
-
-`LocalStorage.setItem` for saving
 ```
-localStorage.setItem("pokemon1", JSON.stringify(pokemonPreview));
-localStorage.setItem("pokemon1Species",JSON.stringify(pokemonPreviewSpecies)
-localStorage.setItem("1ChosenMoveList", JSON.stringify(saveMovelist));
+{% if count_fish > 12 %}
+    {% if page != last_page %}
+        <a href="?page={{page+1}}" class="btn btn-secondary my-3 col-auto mx-0 text-center">Next Page</a>
+    {% endif %}
+{% endif %}
 ```
 
-`getPokemon()`function
-Takes in an argument of any of the 6 pokemon `value: 1 to 6`, and display all of the details stored in localStorage. 
+## 7.4 Create Fish/Plant Entry
+- used a separate route to display `fish_create` form
+- another sepaparate route was used to process the `fish_create form
+- `methods=["POST"]` was used to obtain parameters from front-end
 
-<br>
+### 7.4.1 Validation of inputs for Create Fish form
+List of validation logics used: 
+```
+    errors = {}
 
-# 8. Bootstrap 4, Jquery & Jquery UI Implementation
+    if len(name) == 0:
+        errors['name_is_blank'] = "Fish name cannot be blank"
+
+    if len(scientific_name) == 0:
+        errors['scientific_name_is_blank'] = "Scientific name cannot be blank"
+
+    if len(fish_picture) == 0:
+        errors['fish_picture_is_blank'] = "No fish pic URL was found"
+
+    if len(full_grown_size_in_cm) == 0:
+        errors['full_grown_size_is_blank'] = "No fish size was entered"
+    elif float(full_grown_size_in_cm) < 0:
+        errors['full_grown_size_is_negative'] = "Fish Size cannot be negative"
+
+    if len(reproduction) == 0:
+        errors['reproduction_is_blank'] = "No reproduction method was entered"
+
+    if len(water_temp_in_degc) == 0:
+        errors['water_temp_is_blank'] = "No water temperature was entered"
+    elif float(water_temp_in_degc) < 0:
+        errors['water_temp_is_negative'] = "Water Temp cannot be negative"
+
+    if len(pH) == 0:
+        errors['pH_is_blank'] = "pH cannot be blank"
+    elif float(pH) < 0:
+        errors['pH_is_negative'] = "pH cannot be negative"
+
+    if len(pH) == 0:
+        errors['tank_setup_text_is_blank'] = "No tank setup text was entered"
+```
+### 7.4.2 Handling errors in front end for create entry form
+- if errors are found, overwrite the existing field with `old values` so that users can see which fields were filled wrongly
+
+### 7.4.3 Error messages display using `flash` in `base.template.html`
+```
+{% with messages = get_flashed_messages() %}
+        {% if messages %}
+        <div class="alert alert-success my-0">
+            {%for m in messages %}
+            <p>{{m}}</p>
+            {%endfor%}
+        </div>
+        {%endif%}
+        {%endwith%}
+
+        {% block content %}
+        {% endblock %}
+```
+
+### 7.5 Deleting fish/plant document
+
+
+
+# 8. Bootstrap 4 Implementation
 - Bootstrap 4 was used for re-building the website in a responsive, mobile-first manner. You can access Boostrap 4 resouces [here](https://getbootstrap.com/docs/4.5/getting-started/introduction/)
-
-- Jquery library was used to simplify HTML DOM traversal and manipulation, event handling and calling of PokeAPI
-Jquery can be accessed at this [link](https://jquery.com/download/)
-
-- Jquery UI was further used to enable the searchbar to have auto-complete features and to implement component like progressbar. Jqery UI library can be accessed at this [link](https://jqueryui.com/download/)
 
 The below `code snippets` were added to HTML `<head>`
 
@@ -240,25 +245,13 @@ The below `code snippets` were added to HTML `<head>`
 
 - <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx" crossorigin="anonymous"></script>
 ```
-- For JQuery and Jquery UI
-```
-- <script src="https://code.jquery.com/jquery-3.5.1.min.js" integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
 
-- <script src="js/jquery-ui.min.js" crossorigin="anonymous"></script>
-```
 <br>
 
 # 10. Content Credits
 ## Images of pokemon
-- Rotom Pokedex picture - https://www.serebii.net/
-- Pokemon Sprites - https://pokeapi.co/
-- Pokeball Interior Banner - https://www.deviantart.com/shattered-earth/art/Pokeball-Interiors-571971799
 
-## Pokemon Stats, Names, Flavor Text
-- https://pokeapi.co/
-
-## Pokemon Type Icons
-- https://www.serebii.net/
+## 
 
 <br>
 
@@ -266,10 +259,7 @@ The below `code snippets` were added to HTML `<head>`
 Font was implemented using google fonts. In order to mimic the robotic nature of the pokedex, all text related to the pokedex "speaking" was using `Roboto Mono`. Other text is rendered using `Monserrat`
 
 ```
-<link
-      href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,500;1,100;1,200;1,300;1,400;1,500&family=Roboto+Mono:ital,wght@0,100;0,200;0,300;0,400;0,500;1,100;1,200;1,300;1,400;1,500&display=swap"
-      rel="stylesheet"
-    />
+
 ```
 
 <br>
