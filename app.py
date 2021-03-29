@@ -44,7 +44,7 @@ def index():
 def show_all_fish():
     name = request.args.get('name')
     page = request.args.get('page')
-    # pass length of
+    # pass length of fish collection
     count_fish = db.fish.count_documents({})
 
     if page is None:
@@ -271,6 +271,15 @@ def process_update_fish(fish_id):
 @app.route('/plant')
 def show_all_plant():
     name = request.args.get('name')
+    page = request.args.get('page')
+    # pass length of plant collection
+    count_plant = db.plant.count_documents({})
+
+    if page is None:
+        page = 0
+    else:
+        # Convert page into an int
+        page = int(page)
 
     criteria = {}
 
@@ -280,8 +289,9 @@ def show_all_plant():
             "$options": 'i'
         }
 
-    plant = db.plant.find(criteria)
-    return render_template('show_plant.template.html', plant=plant)
+    plant = db.plant.find(criteria).skip(page*12).limit(12)
+    return render_template('show_plant.template.html',
+                           plant=plant, page=page, count_plant=count_plant)
 
 # CREATE
 # route to show the form
