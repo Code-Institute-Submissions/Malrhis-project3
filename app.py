@@ -43,6 +43,15 @@ def index():
 @app.route('/fish')
 def show_all_fish():
     name = request.args.get('name')
+    page = request.args.get('page')
+    # pass length of
+    count_fish = db.fish.count_documents({})
+
+    if page is None:
+        page = 0
+    else:
+        # Convert page into an int
+        page = int(page)
 
     criteria = {}
 
@@ -52,8 +61,9 @@ def show_all_fish():
             "$options": 'i'
         }
 
-    fish = db.fish.find(criteria)
-    return render_template('show_fish.template.html', fish=fish)
+    fish = db.fish.find(criteria).skip(page*12).limit(12)
+    return render_template('show_fish.template.html', fish=fish,
+                           page=page, count_fish=count_fish)
 
 # CREATE
 # route to show the form
