@@ -2,6 +2,7 @@ from flask import Flask, render_template, request, redirect, url_for
 from flask import flash, send_from_directory
 import os
 import pymongo
+import math
 from dotenv import load_dotenv
 from bson.objectid import ObjectId
 
@@ -46,6 +47,7 @@ def show_all_fish():
     page = request.args.get('page')
     # pass length of fish collection
     count_fish = db.fish.count_documents({})
+    last_page = math.ceil(count_fish/12)-1
 
     if page is None:
         page = 0
@@ -62,8 +64,10 @@ def show_all_fish():
         }
 
     fish = db.fish.find(criteria).skip(page*12).limit(12)
-    return render_template('show_fish.template.html', fish=fish,
-                           page=page, count_fish=count_fish)
+    return render_template('show_fish.template.html',
+                           fish=fish, page=page,
+                           count_fish=count_fish,
+                           last_page=last_page)
 
 # CREATE
 # route to show the form

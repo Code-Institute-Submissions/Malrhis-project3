@@ -65,12 +65,14 @@ Fish List
 </div>
 
 <div class="container my-3 border text-center">
-        {% if page != 0 %}
-        <a href="?page={{page-1}}" class="btn btn-secondary my-3 col-auto mx-0 text-center">Previous Page</a>
-        {% endif %}
-        {% if count_fish > 20 %}
-        <a href="?page={{page+1}}" class="btn btn-secondary my-3 col-auto mx-0 text-center">Next Page</a>
-        {% endif %}
-    </div>
+    {% if page != 0 %}
+    <a href="?page={{page-1}}" class="btn btn-secondary my-3 col-auto mx-0 text-center">Previous Page</a>
+    {% endif %}
+    {% if count_fish > 12 %}
+    {% if page != last_page %}
+    <a href="?page={{page+1}}" class="btn btn-secondary my-3 col-auto mx-0 text-center">Next Page</a>
+    {% endif %}
+    {% endif %}
+</div>
 
 {% endblock %}
