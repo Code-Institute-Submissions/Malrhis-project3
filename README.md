@@ -284,12 +284,52 @@ The below `code snippets` were added to the HTML in `base.template.html` to invo
 
 <br>
 
-# 11. Fonts
-Font was implemented using google fonts. In order to mimic the robotic nature of the pokedex, all text related to the pokedex "speaking" was using `Roboto Mono`. Other text is rendered using `Monserrat`
+# 11. Non-relational Data Model Design of Fish and Plants Collection
+Fish and plants collections are stored in mongoDB. Each document will essentially carry all the information required so that front end can render a card for each plant or fish
+
+# 11.0 Non-relational database design philosophy:
+1. Should encompass enough information about each fish and plant to allow users to find the information useful for their hobby
+2. Front-end should display each document of fish or plant as a card
+3. Card should have images
+4. Images can be provided and stored as a string of text which in turn can be used as HTML `href`
+5. Field related to numerical values has to have validation and checks: for instance: `Water's pH` cannot be negative: it has to be a `float` that is postiive
+6. Field with restricted options should be restricted on the front end and stored as sting in the backend.
+7. Determining of whether information is sufficient or not will draw on my personal knowledge of fish-keeping and aquascaping.
+
+Sample of Fish DB (Plant DB will be similar)
+```
+    _id :6054af0dc135e8fe313bca7b
+    name:"Betta Macrostoma"
+    scientific_name:"Betta Macrostoma"
+    higher_classification:"Betta"
+    fish_picture :"https://tankaddict.com/wp-content/uploads/betta-macrostoma.jpg"
+    full_grown_size_in_cm:"10.0"
+    reproduction:"Paternal Mouthbrooder"
+    diet:"Carnivore"
+    water_temp_in_degc:"25.0"
+    pH:"6.0"
+    tank_setup_text:"Can be maintained in a fully-decorated aquarium although many breeders..."
 
 ```
+## 11.1 Input types for html
+- Chosen based on logicality of the value required to be stored.
+    - for instance: `Water's pH` cannot be negative: it has to be a `float` that is postiive
+- If only a few options are available, fix the options via `dropdown` `select`
+    - Diet: Carnivore, Herbivore, Omnivore
 
+## 11.2 Importance of water parameters as data points
+- the crux of all aquarium keeping is the water quality. 
+- hence each card should have a separate section specially for water quality
 ```
+water_temp_in_degc:"25.0"
+pH:"6.0"
+```
+
+## 11.3 Importance of anecdotal evidence stored as string/text
+```
+tank_setup_text:"Can be maintained in a fully-decorated aquarium although many breeders..."
+```
+Much of the key information about fish-keeping and plant keeping is rooted in word of mouth. One of the key-value pairs has to be dedicated to allowing users to add as much text as possible to guide others to successful fish-keeping
 
 <br>
 
