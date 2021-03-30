@@ -67,6 +67,17 @@ Site is published via Heroku and can be viewed [here](https://aquarist-resource.
 - dnspython
 - python-dotenv
 
+## 3.2 Python Libraries used
+```
+from flask import Flask, render_template, request, redirect, url_for
+from flask import flash, send_from_directory
+import os
+import pymongo
+import math
+from dotenv import load_dotenv
+from bson.objectid import ObjectId
+```
+
 <br>
 
 # 4. The Goals: User Stories or (JTBD) Jobs-to-be-Done
@@ -135,7 +146,7 @@ The final design aims to provide a solution to all user stories listed in `secti
 ## 6.3 Colour
 #
 ```
-For the green: #289296
+For the green colour: #289296
 ```
 <br>
 
@@ -274,6 +285,18 @@ The below `code snippets` were added to the HTML in `base.template.html` to invo
 
 <br>
 
+# 9. Environment setup
+
+## 9.1
+The following were used in the .env file
+```
+MONGO_URI
+SECRET_KEY
+```
+
+MONGO_URI is to enable connection to mongoDB
+SECRET_KEY is used to enable `flash` messages
+
 # 10. Content Credits
 ## Fish content, writeups, actual water parameters
 - https://www.seriouslyfish.com/
@@ -287,7 +310,7 @@ The below `code snippets` were added to the HTML in `base.template.html` to invo
 # 11. Non-relational Data Model Design of Fish and Plants Collection
 Fish and plants collections are stored in mongoDB. Each document will essentially carry all the information required so that front end can render a card for each plant or fish
 
-# 11.0 Non-relational database design philosophy:
+## 11.1 Non-relational database design philosophy:
 1. Should encompass enough information about each fish and plant to allow users to find the information useful for their hobby
 2. Front-end should display each document of fish or plant as a card
 3. Card should have images
@@ -311,13 +334,13 @@ Sample of Fish DB (Plant DB will be similar)
     tank_setup_text:"Can be maintained in a fully-decorated aquarium although many breeders..."
 
 ```
-## 11.1 Input types for html
+## 11.2 Input types for html
 - Chosen based on logicality of the value required to be stored.
     - for instance: `Water's pH` cannot be negative: it has to be a `float` that is postiive
 - If only a few options are available, fix the options via `dropdown` `select`
     - Diet: Carnivore, Herbivore, Omnivore
 
-## 11.2 Importance of water parameters as data points
+## 11.3 Importance of water parameters as data points
 - the crux of all aquarium keeping is the water quality. 
 - hence each card should have a separate section specially for water quality
 ```
@@ -325,7 +348,7 @@ water_temp_in_degc:"25.0"
 pH:"6.0"
 ```
 
-## 11.3 Importance of anecdotal evidence stored as string/text
+## 11.4 Importance of anecdotal evidence stored as string/text
 ```
 tank_setup_text:"Can be maintained in a fully-decorated aquarium although many breeders..."
 ```
@@ -396,27 +419,12 @@ After ensuring that final commit and push via Visual Studio Code was done
 
 ## 14.3 Production
 In the event that `#14.1` and `#14.2` are cleared, the site can then be considered to be in production. 
-If not, repeat to ensure that deploying of code is error free and is working in Github pages.
+If not, repeat to ensure that deploying of code is error free and is working in `Github repo` and `heroku`.
 
 <br>
 
 # 15. Acknowledgements
-- Mr Malcolm Yam - Bootrap, Javascript and Jquery instructor
+- Mr Malcolm Yam - Bootrap instructor
 - Mr Arif Rawi - HTML and CSS instructor
-- Mr Paul Kunxin Chor - Who guided us on logics for Javascript
-- Mr Shun - Teaching assistant, who supported this project by holding consultation sessions
-
-```
-
-## Setup
-1. Create a new file named '.env'
-2. Put inside '.env' the following:
-
-```
-MONGO_URI = connectionstringfrommongoatlas
-```
-
-3. Create a mongo client:
-```
-DB_NAME = 'sample_airbnb'
-client = pymongo.MongoClient(MONGO_URI)
+- Mr Paul Kunxin Chor - Who guided us on python, Jinja2, flask, mongo, pymongo
+- Mr Ace Liang - Teaching assistant, who supported this project by holding consultation sessions.
