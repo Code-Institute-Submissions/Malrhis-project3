@@ -413,17 +413,21 @@ After ensuring that final commit and push via Visual Studio Code was done
 1. Check if the contents have been successfully pushed to repository at https://github.com/Malrhis/project3
 
 ## 14.3 Deployment to Heroku
-1. Login to `heroku` on terminal
+1. Login to `heroku` on terminal using `heroku login -i`
 2. Check `remotes` using `git remote -v`
 3. Ensure that `requirements.txt` is updated correctly
 4. perform `git push heroku master`
-2. Verify that site has been published to Heroku dashboard in Heroku ([Link](https://dashboard.heroku.com/apps/aquarist-resource))
-3. Click on [Published URL](https://aquarist-resource.herokuapp.com/)
-
-4. perform another round of validation based on `#14.1 Preparation` but this time in `heroku` instead of `gitpod browser preview`
+5. Setup environment variables in heroku as follows
+```
+heroku config:set MONGO_URI= XXX
+```
+6. Check that environment variables can be seen in heroku app settings under `config vars`
+5. Verify that site has been published to Heroku dashboard in Heroku ([Link](https://dashboard.heroku.com/apps/aquarist-resource))
+7. Click on [Published URL](https://aquarist-resource.herokuapp.com/)
+8. perform another round of validation based on `#14.1 Preparation` but this time in `heroku` instead of `gitpod browser preview`
 
 ## 14.3 Production
-In the event that `#14.1` and `#14.2` are cleared, the site can then be considered to be in production. 
+In the event that `#14.1`, `#14.2` & `#14.3`  are cleared, the site can then be considered to be in production. 
 If not, repeat to ensure that deploying of code is error free and is working in `Github repo` and `heroku`.
 
 <br>
