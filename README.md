@@ -366,6 +366,11 @@ Much of the key information about fish-keeping and plant keeping is rooted in wo
   - In order to handle this, each flag was picked out to check if it was truly related to `Jinja2` or was an actual error
   - Post code fix Response from Nu Html Checker: `"Document checking completed. No errors or warnings to show."`
 
+## 12.2 PEP8 Style guide for Python
+All code in `app.py` complies with `PEP8` [Style guide](https://www.python.org/dev/peps/pep-0008/) 
+
+This is ensured by making sure no callouts from gitpod python linter are present in `app.py` and that no lines of code in `app.py` exceed 79 Characters
+
 ## 12.2 Testing and Bug Fixes (Test Case Table)
 
 | # |Type| Test       | Result           | Fix/Expected Result  |
