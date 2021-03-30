@@ -337,64 +337,62 @@ Much of the key information about fish-keeping and plant keeping is rooted in wo
 ## 12.1 Code Validation using Code Validators
 - `style.css` was validated using the W3C Jigsaw validator ([Link](https://jigsaw.w3.org/css-validator/validator))
   - No issues were found with `style.css`
-- `script.js` was validated using JShint ([Link](https://jshint.com/))
-  -  The following configurations were included in JShint:
-  - <img src="images/jshint-config.png" style="height:500px">
-  - No issues were found with `New Javascript features (ES6)` and `jQuery` checked in the configuration list
   
-- `index.html` was validated using the W3 Nu HTML Validator ([Link](https://validator.w3.org/nu/#file))
-  - It was found that `<section>` tags and `label`/`placeholder` attributes were wrongly used.
-  - Code was changed to remove erroneous tags and attributes. Replaced these tags with `<div>` and `<p>` to render content instead.
+- all `.html` files in `templates` was validated using the W3 Nu HTML Validator ([Link](https://validator.w3.org/nu/#file))
+  - Many of the `Jinja2` syntax were picked up as errors
+  - In order to handle this, each flag was picked out to check if it was truly related to `Jinja2` or was an actual error
   - Post code fix Response from Nu Html Checker: `"Document checking completed. No errors or warnings to show."`
 
 ## 12.2 Testing and Bug Fixes (Test Case Table)
 
 | # |Type| Test       | Result           | Fix/Expected Result  |
 |-- |--|------------- |:-------------:| -----:|
-|1  |Functionality|Pokedex search is supposed to autocomplete all pokemon | Display entire list of pokemon from pokeAPI | not able to display dropdown. Discovered that it's due to the script linking at the bottom of HTML body. Loading JQuery script last solved the issue |
-|2  |Usability| Enter unlisted pokemon name into pokedex search | No response | Added validation to alert user if they enter a non-existing pokemon name |
-|3  |Usability| Display of Name | Pokemon names were uncapitalised|Added code handling to ensure that first letter of pokemon name is capitalised |
-|4  |Functionality| Display of pokemon type | If pokemon has 2 types, only one was showing. Expected result is to show both when both are available | Added handling. If pokemon has a 2nd type, display 2nd type. if not then only show one type (if pokemon is a pure typing)
-|5  |Functionality| Display of pokemon stats | Pokemon Stats should scale according to the progressbar widget, but all values of pokemon stats above value 100 resulted in all bars being full for some pokemon. The difference between the 6 stats was lost | Added scaling. pokemon stats were divided by 20 and then multiplied by 100 again. Progress bars now only max out at 200 and above
-|6  |Functionality| Moveset display | Can choose and display as many moves from autocomplete movebar | All Ok
-|7  |Usability| Moveset duplicate | Found that same move can be selected. Should not be the case as pokemon cannot have duplicated moves | Should only show one move once in the selected displayed move. Added alert to handle if the same move is selected|
-|8  |Functionality| Adding of proview pokemon in to 6 slots | Pokemon were able to be successfull stored in local storage. local storage items were found to exist, and retrieval of pokemon Name had no problems| All ok|
-|9  |Functionality| Overwriting pokemon in slot | If pokemon has already be saved in slot X, attempt to override the pokemon in slot X with another pokemon | All Ok|
-|10 |Functionality| Refresh page to check if pokemon saved stay in slot | Pokemon stayed in page because of getpokemon function at beginning of script.js | All Ok|
-|11 |Functionality| Pokemon move permanence and transfer | Selected moves from preview pokemon were to be stored and transferred to the save slots | All Ok |
-|12 |Usability| Clear Move button | The clear move button cleared the moves for the specific pokemon and removed the element from the html DOM| All OK|
-|13 |Responsiveness| Test screen size | Tested using Firefox to mock iPhone X, Samsung S9| Save slot buttons were not sizing properly. Edited code to allow bootstrap 4 grid system to apply without buttons overflowing to the next row|
-|14 |Responsiveness|Test navbar toggle responsiveness | Navbar toggle disappears when changing to Samsung S9 and iphone instead of `responsive`| It was found that the pokeball images used as placeholders were exceeding the viewport size and pushing the navbar toggle off the viewport. Code changes were added to constrict pokeball placeholder images to 70X70px |
-|15 |Usability| Autocomplete seach bar to handle auto capitalization of mobile phone keyboards | Did not handle. API was not called due to capitalization of first character | Double layer of handling added: first toLowerCase() was used when calling API to prevent errors. Capitalization was added to autocomplete to ensure that Capital letters triggle dropdown in autocomplete bar|
-|16 |Responsiveness| images in the save slots were not centred | Suppose to be centred. |applied bootstrap class `"mx-auto"` in order to center the element|
+|1  |Functionality| Search bar is supposed to display fish based on string entered | Displayed list fish that match the string | All OK |
+|2  |Usability| Enter random string of text which doesn't match into search bar | returns no fish/plants | All OK |
+|3  |Functionality| Display of all fields from mongo onto card in `show_all_fish` and `show_all_plants` | Show all fields from mongoDB in front end | Did not return `diet` element in `fish` template. was found that a wrong parameter was used (`plant` was used instead of `fish` and since plants don't have diets, front end was not displaying properly)
+|5  |Functionality| Validation of empty input for `create` & `update` | flash message to alert user that input during `create` and `update` cannot be empty | All OK
+|6  |Functionality| When error values are entered in `update`, supposed to merge `old values` and `error values` + display `flash` message so user knows which error occurred during validation and can edit their error | Only `old values` were showing | typo in `old values` and `error values` syntax. Was fixed quickly and now All OK
+|7  |Usability| Page buttons should only show `next page` in the first to 2nd last page. should not show in last page. `Previous page` should only show in 2nd to last page | Button order did not work properly, and `next page` was shown in the last page even though there are no more documents to be displayed | created new variable to store `last_page` value. If `page != last page` then display `next button`. All OK now
+|8  |Usability| style.css colour should be turquoise as that is the theme for the website | was stuck in black colour | Attempted to fix by moving file tree for `static`. Was found that `style.css` was being overwritted by the bootstrap class `navbar-dark`. Removed the class and the static file was synching |
+|9  |Usability| favicon should be displayed | favicon could not be displayed | Attempted bugfix using different `url for` syntax. Was fixed by clearing cache using `ctrl + f5` |
+|10 |Functionality| Delete document  | Document should be gone from fish/plant collection in mongo and on refresh, should not show in `show_all_fish` / `show_all_plants` | All Ok|
+|11 |Functionality| url routing using `url_for` | navigate all links on navbar and site to ensure navigation are not broken | Navigation All Ok |
+|12 |Responsiveness| Test screen size | Tested using Firefox to mock iPhone X, Samsung S9| Was found that cards were not `fluid` type. changed all cards to `fluid` so that they look better on mobile |
+|13 |Functionality & Responsiveness| Deployment test to heroku | clicked on heroku link in mobile phone and tested if pages were working correctly and responsively | All Ok |
 
 <br>
 
 # 14. Deployment
+
+# 14.0 set `debug=False`!!! since we are going into production and no longer in development
+
 ## 14.1 Preparation
-Before the site goes `live` the following elements are checked via Visual Studio Code's `Live Server` extension:
+Before the site goes `live` the following elements are checked gitpod's native browser preview via open port `8080`. This is done by executing command in terminal `python3 app.py` to run the `flask app` in `app.py`
 - Fulfillment of Learning objectives from 'Code Insitutes' Assessment Handbook`
 - Check all code linters and validators are clear
 - Check that all images src are not broken
 - Test viewport dynamic resizing for android (Samsung S9) and iOS (iPhone X/XS)
-- Check Preview pokemon feature
-- Ensure all elements of the preview pokemon are displayed, including sprites and type icons
-- Check Movelist for preview pokemon
-- Check movelist double entry alert
-- Check Saving function and saving function alert message
-- Check all 6 slots can be saved
-- Ensure all elements of the Saved pokemon are displayed, including sprites and type icons
-- Check Movelist for all 6 pokemon
+- Check Create, Read, Display, Update, Delete functions from Fish to Plant
+- Ensure all elements of the fish or plant are displayed, including images rendered from `picture html url string` key-value pair stored in mongoDB document
+- Check navbar functionality and responsiveness
+- Check pagination is working for `show_all_fish` and `show_all_plants`
 
-## 14.2 Deployment Steps
+## 14.2 Deployment Steps to Github
 Deployment was done via github pages.
 
 After ensuring that final commit and push via Visual Studio Code was done
 
-1. Check if the contents have been successfully pushed to repository at https://github.com/Malrhis/Project-2-codeinstitute
-2. Verify that site has been published to github pages via settings section of the repository ([Link](https://github.com/Malrhis/Project-2-codeinstitute/settings))
-3. Click on [Published URL](https://malrhis.github.io/Project-2-codeinstitute/)
-4. perform another round of validation based on `#14.1 Preparation` but this time in github pages instead of liveserver
+1. Check if the contents have been successfully pushed to repository at https://github.com/Malrhis/project3
+
+## 14.3 Deployment to Heroku
+1. Login to `heroku` on terminal
+2. Check `remotes` using `git remote -v`
+3. Ensure that `requirements.txt` is updated correctly
+4. perform `git push heroku master`
+2. Verify that site has been published to Heroku dashboard in Heroku ([Link](https://dashboard.heroku.com/apps/aquarist-resource))
+3. Click on [Published URL](https://aquarist-resource.herokuapp.com/)
+
+4. perform another round of validation based on `#14.1 Preparation` but this time in `heroku` instead of `gitpod browser preview`
 
 ## 14.3 Production
 In the event that `#14.1` and `#14.2` are cleared, the site can then be considered to be in production. 
