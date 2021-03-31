@@ -301,8 +301,14 @@ SECRET_KEY is used to enable `flash` messages
 ## Fish content, writeups, actual water parameters
 - https://www.seriouslyfish.com/
 
+## Plant care content
+- https://tropica.com/en
+- https://www.2hraquarist.com/
+
 ## Images
 - https://unsplash.com/
+- various images for each fish entry crowdsourced using image urls from google image search (I do not claim to own any of these images)
+    - just as how a crowdsourcing data centric website would be, I only claim to store and display the URL of the image itself for educational purposes
 
 
 <br>
