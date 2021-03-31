@@ -387,6 +387,7 @@ This is ensured by making sure no callouts from gitpod python linter are present
 |11 |Functionality| url routing using `url_for` | navigate all links on navbar and site to ensure navigation are not broken | Navigation All Ok |
 |12 |Responsiveness| Test screen size | Tested using Firefox to mock iPhone X, Samsung S9| Was found that cards were not `fluid` type. changed all cards to `fluid` so that they look better on mobile |
 |13 |Functionality & Responsiveness| Deployment test to heroku | clicked on heroku link in mobile phone and tested if pages were working correctly and responsively | All Ok |
+|14 |Usability| Browser Tab name should be correct | Found that browser tab name for plants create form was still named as fish create form | Changed  Jinja2 block and now All OK|
 
 <br>
 
